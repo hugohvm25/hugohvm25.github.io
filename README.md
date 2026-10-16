@@ -12,6 +12,8 @@ Desenvolvido para ser leve, direto ao ponto, responsivo e sem sobrecarga visual 
 - **Alternador Dark / Light Mode**: Suporte nativo a temas escuro e claro com persistência automática no `localStorage`.
 - **Zero Dependências Pesadas**: Construído com HTML5 semântico, CSS3 moderno e Vanilla JavaScript (sem necessidade de bundlers ou build steps).
 - **Interações Suaves**:
+  - Fundo animado com partículas verde-escuras e pontos luminosos em verde-claro.
+  - Gradiente verde animado no nome principal, seguindo o ponteiro do mouse.
   - Badge pulsante de status ("Disponível para novos projetos").
   - Botão interativo de copiar e-mail com 1 clique e feedback instantâneo.
   - Painel de atividade pública do GitHub atualizado automaticamente a cada 5 minutos.
@@ -42,6 +44,7 @@ hugohvm25.github.io/
 │   ├── base.css               # Reset, tipografia base e container
 │   ├── components.css         # Botões, badges, status pill
 │   ├── cursor.css             # Cursor personalizado para mouse/trackpad
+│   ├── particles.css          # Camada de fundo para partículas animadas
 │   ├── header.css             # Navbar, logo, dark toggle, menu mobile
 │   ├── hero.css               # Apresentação principal e card de perfil
 │   ├── about.css              # Seção sobre mim e destaques
@@ -58,6 +61,8 @@ hugohvm25.github.io/
     ├── scramble.js            # Roleta de código (code scramble) estilo rubenmarcus.dev
     ├── i18n.js                # Alternador de idiomas PT/EN com tradução em tempo real
     ├── cursor.js              # Cursor personalizado com estados de hover e clique
+    ├── background-particles.js # Partículas e vagalumes animados no fundo
+    ├── hero-name-gradient.js  # Gradiente do nome que acompanha o ponteiro
     └── github-activity.js     # Estatísticas e último commit público do GitHub
 ```
 

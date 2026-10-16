@@ -1,8 +1,10 @@
 const GithubActivityModule = {
   username: 'hugohvm25',
+  firstContributionYear: 2023,
   refreshInterval: 5 * 60 * 1000,
 
   init() {
+    this.totalCount = document.getElementById('github-total-count');
     this.yearCount = document.getElementById('github-year-count');
     this.monthCount = document.getElementById('github-month-count');
     this.todayCount = document.getElementById('github-today-count');
@@ -10,10 +12,11 @@ const GithubActivityModule = {
     this.commitMeta = document.getElementById('github-latest-commit-meta');
     this.status = document.getElementById('github-activity-status');
 
-    if (!this.yearCount || !this.monthCount || !this.todayCount ||
+    if (!this.totalCount || !this.yearCount || !this.monthCount || !this.todayCount ||
         !this.commitLink || !this.commitMeta || !this.status) return;
 
     this.lastUpdated = null;
+    this.refreshPromise = null;
     this.hasError = false;
     this.latestCommit = null;
     this.language = document.documentElement.lang === 'en' ? 'en' : 'pt';
@@ -40,13 +43,17 @@ const GithubActivityModule = {
         loading: 'Carregando atividade...',
         noCommit: 'Nenhum commit público recente encontrado',
         updated: 'Atualizado às',
-        updateError: 'Não foi possível atualizar todos os dados do GitHub.'
+        updateError: 'Não foi possível atualizar todos os dados do GitHub.',
+        totalUnavailable: 'Total indisponível',
+        rateLimit: 'O GitHub limitou temporariamente as consultas. Tente novamente mais tarde.'
       },
       en: {
         loading: 'Loading activity...',
         noCommit: 'No recent public commit found',
         updated: 'Updated at',
-        updateError: 'Could not refresh all GitHub data.'
+        updateError: 'Could not refresh all GitHub data.',
+        totalUnavailable: 'Total unavailable',
+        rateLimit: 'GitHub temporarily rate-limited requests. Please try again later.'
       }
     };
     return translations[this.language][key];
@@ -73,9 +80,9 @@ const GithubActivityModule = {
     return `${year}-${month}-${day}`;
   },
 
-  async fetchContributionStats() {
+  async fetchContributionPage(url, year) {
     const response = await fetch(
-      `https://github.com/users/${this.username}/contributions?refresh=${Date.now()}`,
+      url,
       { headers: { 'Accept-Language': 'en' }, cache: 'no-store' }
     );
     if (!response.ok) {
@@ -85,9 +92,9 @@ const GithubActivityModule = {
     const html = await response.text();
     const page = new DOMParser().parseFromString(html, 'text/html');
     const heading = page.getElementById('js-contribution-activity-description')?.textContent || '';
-    const totalMatch = heading.match(/([\d,]+)\s+contributions?\s+in the last year/i);
-    if (!totalMatch) {
-      throw new Error('GitHub contribution total was not found in the profile response');
+    const totalMatch = heading.match(/([\d,]+)\s+contributions?\s+in\s+(?:the last year|(\d{4}))/i);
+    if (!totalMatch || (year && totalMatch[2] !== String(year))) {
+      throw new Error(`GitHub contribution total${year ? ` for ${year}` : ''} was not found in the profile response`);
     }
 
     const tooltips = new Map(
@@ -96,9 +103,7 @@ const GithubActivityModule = {
         tooltip.textContent.trim()
       ])
     );
-    const dailyCounts = Array.from(
-      page.querySelectorAll('.ContributionCalendar-day[data-date]')
-    ).map(day => {
+    const dailyCounts = Array.from(page.querySelectorAll('.ContributionCalendar-day[data-date]'), day => {
       const tooltip = tooltips.get(day.id) || '';
       const countMatch = tooltip.match(/^([\d,]+)\s+contributions?\s+on/i);
       return {
@@ -107,47 +112,60 @@ const GithubActivityModule = {
       };
     });
 
-    const now = new Date();
-    const today = this.getLocalDateString(now);
+    return {
+      total: Number(totalMatch[1].replace(/,/g, '')),
+      dailyCounts
+    };
+  },
+
+  fetchContributionYear(year) {
+    return this.fetchContributionPage(
+      `https://github.com/users/${this.username}/contributions?from=${year}-01-01&to=${year}-12-31&refresh=${Date.now()}`,
+      year
+    );
+  },
+
+  async fetchContributionStats() {
+    const currentYear = new Date().getFullYear();
+    const years = Array.from(
+      { length: currentYear - this.firstContributionYear + 1 },
+      (_, index) => this.firstContributionYear + index
+    );
+    const [yearlyResults, rollingStats] = await Promise.all([
+      Promise.all(years.map(year => this.fetchContributionYear(year))),
+      this.fetchContributionPage(
+        `https://github.com/users/${this.username}/contributions?refresh=${Date.now()}`
+      )
+    ]);
+    const today = this.getLocalDateString(new Date());
     const monthPrefix = today.slice(0, 7);
 
     return {
-      year: Number(totalMatch[1].replace(/,/g, '')),
-      month: dailyCounts
+      total: yearlyResults.reduce((sum, result) => sum + result.total, 0),
+      year: rollingStats.total,
+      month: rollingStats.dailyCounts
         .filter(day => day.date.startsWith(monthPrefix))
         .reduce((total, day) => total + day.count, 0),
-      today: dailyCounts.find(day => day.date === today)?.count || 0
+      today: rollingStats.dailyCounts.find(day => day.date === today)?.count || 0
     };
   },
 
   async fetchLatestCommit() {
     const eventsResponse = await fetch(
-      `https://api.github.com/users/${this.username}/events/public?per_page=100`,
+      `https://api.github.com/search/commits?q=author%3A${this.username}&sort=author-date&order=desc&per_page=1&refresh=${Date.now()}`,
       { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' }
     );
+    if (eventsResponse.status === 403 || eventsResponse.status === 429) {
+      throw new Error(this.translate('rateLimit'));
+    }
     if (!eventsResponse.ok) {
-      throw new Error(`GitHub events request failed with status ${eventsResponse.status}`);
+      throw new Error(`GitHub commit search failed with status ${eventsResponse.status}`);
     }
 
-    const events = await eventsResponse.json();
-    const latestPush = events
-      .filter(event => event.type === 'PushEvent' &&
-        event.payload?.head &&
-        /^[\w.-]+\/[\w.-]+$/.test(event.repo?.name || '') &&
-        /^[a-f\d]{40}$/i.test(event.payload.head))
-      .sort((first, second) => Date.parse(second.created_at) - Date.parse(first.created_at))[0];
+    const result = await eventsResponse.json();
+    const commit = result.items?.[0];
+    if (!commit) return null;
 
-    if (!latestPush) return null;
-
-    const commitResponse = await fetch(
-      `https://api.github.com/repos/${latestPush.repo.name}/commits/${latestPush.payload.head}`,
-      { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' }
-    );
-    if (!commitResponse.ok) {
-      throw new Error(`GitHub commit request failed with status ${commitResponse.status}`);
-    }
-
-    const commit = await commitResponse.json();
     const commitUrl = new URL(commit.html_url);
     if (commitUrl.protocol !== 'https:' || commitUrl.hostname !== 'github.com') {
       throw new Error('GitHub returned an invalid commit URL');
@@ -155,39 +173,46 @@ const GithubActivityModule = {
 
     return {
       message: commit.commit.message.split('\n')[0],
-      repository: latestPush.repo.name,
+      repository: commit.repository.full_name,
       sha: commit.sha,
-      date: new Date(commit.commit.author?.date || latestPush.created_at),
+      date: new Date(commit.commit.author?.date || commit.commit.committer?.date),
       url: commitUrl.href
     };
   },
 
   async refresh() {
-    const results = await Promise.allSettled([
+    if (this.refreshPromise) return this.refreshPromise;
+
+    this.refreshPromise = Promise.allSettled([
       this.fetchContributionStats(),
       this.fetchLatestCommit()
-    ]);
+    ]).then(results => {
+      this.hasError = false;
+      results.forEach((result, index) => {
+        if (result.status === 'rejected') {
+          this.hasError = true;
+          console.error('GitHub activity update failed:', result.reason);
+        } else if (index === 0) {
+          this.stats = result.value;
+        } else {
+          this.latestCommit = result.value;
+        }
+      });
 
-    this.hasError = false;
-    results.forEach((result, index) => {
-      if (result.status === 'rejected') {
-        this.hasError = true;
-        console.error('GitHub activity update failed:', result.reason);
-      } else if (index === 0) {
-        this.stats = result.value;
-      } else {
-        this.latestCommit = result.value;
+      if (results.some(result => result.status === 'fulfilled')) {
+        this.lastUpdated = Date.now();
       }
+      this.render();
+    }).finally(() => {
+      this.refreshPromise = null;
     });
 
-    if (results.some(result => result.status === 'fulfilled')) {
-      this.lastUpdated = Date.now();
-    }
-    this.render();
+    return this.refreshPromise;
   },
 
   render() {
     if (this.stats) {
+      this.totalCount.textContent = this.formatNumber(this.stats.total);
       this.yearCount.textContent = this.formatNumber(this.stats.year);
       this.monthCount.textContent = this.formatNumber(this.stats.month);
       this.todayCount.textContent = this.formatNumber(this.stats.today);

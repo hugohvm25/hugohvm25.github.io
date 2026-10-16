@@ -80,7 +80,7 @@
 
 .github-activity-grid {
   display: grid;
-  grid-template-columns: 0.9fr 0.9fr 0.8fr 3fr;
+  grid-template-columns: 0.8fr 0.9fr 0.9fr 0.8fr 3fr;
 }
 
 .github-activity-stat,
@@ -281,14 +281,14 @@
   }
 
   .github-activity-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .github-activity-stat {
     border-bottom: 1px solid var(--border-subtle);
   }
 
-  .github-activity-stat:nth-child(3) {
+  .github-activity-stat:nth-child(even) {
     border-right: 0;
   }
 

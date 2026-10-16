@@ -18,6 +18,12 @@ html {
 body {
   font-family: var(--font-main);
   background-color: var(--bg-body);
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.2) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;

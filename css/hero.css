@@ -126,6 +126,51 @@
   margin-bottom: 2.5rem;
 }
 
+.btn-projects {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  color: var(--accent-primary);
+  background: transparent;
+  border-color: var(--accent-primary);
+}
+
+.btn-projects::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: var(--accent-primary);
+  content: '';
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 450ms ease;
+}
+
+.btn-projects:hover,
+.btn-projects:focus-visible {
+  color: #ffffff;
+  border-color: var(--accent-primary);
+}
+
+[data-theme="light"] .btn-projects {
+  color: var(--accent-primary);
+}
+
+[data-theme="light"] .btn-projects:hover,
+[data-theme="light"] .btn-projects:focus-visible {
+  color: #ffffff;
+}
+
+.btn-projects:hover::before,
+.btn-projects:focus-visible::before {
+  transform: scaleX(1);
+}
+
+.btn-projects:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
 .hero-socials {
   display: flex;
   align-items: center;

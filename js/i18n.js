@@ -66,10 +66,18 @@ const I18nModule = {
       'contact.desc': 'Estou sempre aberto a novas oportunidades profissionais, projetos freelance e colaborações técnicas. Fique à vontade para me enviar uma mensagem!',
       'contact.copy': 'Copiar',
       'contact.send': 'Enviar E-mail',
+      'github.title': 'Últimas atividades do GitHub',
+      'github.year': 'Últimos 12 meses',
+      'github.month': 'Este mês',
+      'github.today': 'Hoje',
+      'github.latest': 'Último commit público',
+      'github.loading': 'Carregando atividade...',
+      'github.noCommit': 'Nenhum commit público recente encontrado',
+      'github.updated': 'Atualizado às',
+      'github.updateError': 'Não foi possível atualizar todos os dados do GitHub.',
 
       // Rodapé
-      'footer.rights': '© 2026 Hugo Verissimo de Mello. Todos os direitos reservados.',
-      'footer.top': 'Voltar ao topo ↑'
+      'footer.rights': '© 2026 Hugo Verissimo de Mello. Todos os direitos reservados.'
     },
 
     en: {
@@ -131,10 +139,18 @@ const I18nModule = {
       'contact.desc': "I'm always open to new professional opportunities, freelance projects, and technical collaborations. Feel free to reach out!",
       'contact.copy': 'Copy',
       'contact.send': 'Send Email',
+      'github.title': 'Latest public GitHub activity',
+      'github.year': 'Last 12 months',
+      'github.month': 'This month',
+      'github.today': 'Today',
+      'github.latest': 'Latest public commit',
+      'github.loading': 'Loading activity...',
+      'github.noCommit': 'No recent public commit found',
+      'github.updated': 'Updated at',
+      'github.updateError': 'Could not refresh all GitHub data.',
 
       // Footer
-      'footer.rights': '© 2026 Hugo Verissimo de Mello. All rights reserved.',
-      'footer.top': 'Back to top ↑'
+      'footer.rights': '© 2026 Hugo Verissimo de Mello. All rights reserved.'
     }
   },
 
@@ -179,6 +195,8 @@ const I18nModule = {
     if (typeof ScrambleModule !== 'undefined' && ScrambleModule.updateLanguage) {
       ScrambleModule.updateLanguage(lang);
     }
+
+    document.dispatchEvent(new CustomEvent('portfolio-language-change', { detail: { lang } }));
   },
 
   bindEvents() {
@@ -192,4 +210,3 @@ const I18nModule = {
     });
   }
 };
-

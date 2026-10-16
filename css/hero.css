@@ -14,7 +14,7 @@
 }
 
 .hero-content {
-  max-width: 580px;
+  min-width: 0;
 }
 
 .highlight {

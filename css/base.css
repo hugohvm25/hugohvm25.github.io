@@ -34,9 +34,7 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1040px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  padding: 0 clamp(1.25rem, 4vw, 4rem);
 }
 
 /* Padrão para seções */
@@ -79,4 +77,3 @@ body {
     padding: 3.75rem 0;
   }
 }
-

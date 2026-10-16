@@ -33,7 +33,7 @@ const TitleMarqueeModule = {
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         stopMarquee();
-        document.title = 'Ei, volte aqui! • Hugo Verissimo de Mello';
+        document.title = 'Volte aqui! • Hugo Verissimo de Mello';
       } else {
         startMarquee();
       }

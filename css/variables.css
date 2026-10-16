@@ -13,25 +13,26 @@
 
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.16);
-  --border-hover: rgba(16, 185, 129, 0.45);
+  --border-hover: rgba(33, 93, 31, 0.55);
 
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --text-accent: #34d399;
+  --text-accent: #215D1F;
 
-  --accent-primary: #10b981;
-  --accent-secondary: #059669;
-  --accent-hover: #059669;
+  --accent-rgb: 33, 93, 31;
+  --accent-primary: #215D1F;
+  --accent-secondary: #215D1F;
+  --accent-hover: #215D1F;
   --accent-glow: transparent;
-  --accent-light: rgba(16, 185, 129, 0.12);
+  --accent-light: rgba(33, 93, 31, 0.12);
 
-  --badge-bg: rgba(16, 185, 129, 0.1);
-  --badge-text: #6ee7b7;
-  --badge-border: rgba(16, 185, 129, 0.25);
+  --badge-bg: rgba(33, 93, 31, 0.1);
+  --badge-text: #215D1F;
+  --badge-border: rgba(33, 93, 31, 0.3);
 
-  --success-color: #10b981;
-  --success-bg: rgba(16, 185, 129, 0.12);
+  --success-color: #215D1F;
+  --success-bg: rgba(33, 93, 31, 0.12);
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
   --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.8);
@@ -61,25 +62,25 @@
 
   --border-subtle: rgba(0, 0, 0, 0.08);
   --border-strong: rgba(0, 0, 0, 0.14);
-  --border-hover: rgba(5, 150, 105, 0.4);
+  --border-hover: rgba(33, 93, 31, 0.4);
 
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-muted: #64748b;
-  --text-accent: #059669;
+  --text-accent: #215D1F;
 
-  --accent-primary: #059669;
-  --accent-secondary: #047857;
-  --accent-hover: #047857;
-  --accent-glow: rgba(5, 150, 105, 0.18);
-  --accent-light: rgba(5, 150, 105, 0.08);
+  --accent-rgb: 33, 93, 31;
+  --accent-primary: #215D1F;
+  --accent-secondary: #215D1F;
+  --accent-hover: #215D1F;
+  --accent-glow: rgba(33, 93, 31, 0.18);
+  --accent-light: rgba(33, 93, 31, 0.08);
 
-  --badge-bg: rgba(5, 150, 105, 0.08);
-  --badge-text: #065f46;
-  --badge-border: rgba(5, 150, 105, 0.2);
+  --badge-bg: rgba(33, 93, 31, 0.08);
+  --badge-text: #215D1F;
+  --badge-border: rgba(33, 93, 31, 0.25);
 
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
-  --shadow-glow: 0 10px 30px -5px rgba(5, 150, 105, 0.15);
+  --shadow-glow: 0 10px 30px -5px rgba(33, 93, 31, 0.15);
 }
-

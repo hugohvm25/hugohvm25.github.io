@@ -26,7 +26,7 @@
 }
 
 .btn-primary:hover {
-  background: var(--accent-hover, #059669);
+  background: var(--accent-hover, #215D1F);
   transform: translateY(-1px);
   box-shadow: 0 4px 18px var(--accent-glow);
 }
@@ -61,13 +61,13 @@
   padding: 0.35rem 0.85rem;
   border-radius: var(--radius-full);
   background: var(--success-bg);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border: 1px solid rgba(var(--accent-rgb), 0.25);
   color: var(--success-color);
   font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.01em;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+  box-shadow: 0 2px 8px rgba(var(--accent-rgb), 0.1);
 }
 
 .status-dot {
@@ -107,4 +107,3 @@
   color: var(--badge-text);
   border: 1px solid var(--badge-border);
 }
-

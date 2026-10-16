@@ -14,6 +14,7 @@ Desenvolvido para ser leve, direto ao ponto, responsivo e sem sobrecarga visual 
 - **Interações Suaves**:
   - Badge pulsante de status ("Disponível para novos projetos").
   - Botão interativo de copiar e-mail com 1 clique e feedback instantâneo.
+  - Painel de atividade pública do GitHub atualizado automaticamente a cada 5 minutos.
   - Menu responsivo para smartphones e tablets.
   - Destaque do link de navegação conforme a rolagem da página.
 - **Estrutura sem sobrecarga**:
@@ -40,6 +41,7 @@ hugohvm25.github.io/
 │   ├── variables.css          # Design tokens (cores, espaçamentos, temas)
 │   ├── base.css               # Reset, tipografia base e container
 │   ├── components.css         # Botões, badges, status pill
+│   ├── cursor.css             # Cursor personalizado para mouse/trackpad
 │   ├── header.css             # Navbar, logo, dark toggle, menu mobile
 │   ├── hero.css               # Apresentação principal e card de perfil
 │   ├── about.css              # Seção sobre mim e destaques
@@ -54,7 +56,9 @@ hugohvm25.github.io/
     ├── scroll.js              # Scroll spy (destaque automático na navbar)
     ├── title-marquee.js       # Efeito letreiro no title da aba com detecção de visibilidade
     ├── scramble.js            # Roleta de código (code scramble) estilo rubenmarcus.dev
-    └── i18n.js                # Alternador de idiomas PT/EN com tradução em tempo real
+    ├── i18n.js                # Alternador de idiomas PT/EN com tradução em tempo real
+    ├── cursor.js              # Cursor personalizado com estados de hover e clique
+    └── github-activity.js     # Estatísticas e último commit público do GitHub
 ```
 
 ---

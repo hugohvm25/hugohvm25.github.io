@@ -3,7 +3,7 @@
  * Cria um efeito de letreiro corrediço na aba do navegador e interage com a visibilidade da página
  */
 const TitleMarqueeModule = {
-  marqueeText: ' Hugo Verissimo de Mello | Desenvolvedor Full Stack | ',
+  marqueeText: ' Hugo Verissimo de Mello | Dev Full Stack | ',
   speed: 280, // Velocidade em milissegundos
   timer: null,
 
@@ -33,7 +33,7 @@ const TitleMarqueeModule = {
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
         stopMarquee();
-        document.title = '👀 Ei, volte aqui! • Hugo Verissimo de Mello';
+        document.title = 'Ei, volte aqui! • Hugo Verissimo de Mello';
       } else {
         startMarquee();
       }

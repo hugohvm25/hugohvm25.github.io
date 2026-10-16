@@ -1,0 +1,85 @@
+/* ==========================================================================
+   DESIGN TOKENS & VARIÁVEIS DE TEMA (DARK / LIGHT)
+   ========================================================================== */
+
+:root {
+  /* Tema Escuro (Padrão) - Preto Puro */
+  --bg-body: #000000;
+  --bg-card: #0a0a0c;
+  --bg-card-hover: #121215;
+  --bg-card-solid: #070709;
+  --bg-input: #0e0e11;
+  --bg-nav: rgba(0, 0, 0, 0.92);
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --border-hover: rgba(16, 185, 129, 0.45);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-accent: #34d399;
+
+  --accent-primary: #10b981;
+  --accent-secondary: #059669;
+  --accent-hover: #059669;
+  --accent-glow: transparent;
+  --accent-light: rgba(16, 185, 129, 0.12);
+
+  --badge-bg: rgba(16, 185, 129, 0.1);
+  --badge-text: #6ee7b7;
+  --badge-border: rgba(16, 185, 129, 0.25);
+
+  --success-color: #10b981;
+  --success-bg: rgba(16, 185, 129, 0.12);
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --shadow-md: 0 4px 20px -2px rgba(0, 0, 0, 0.8);
+  --shadow-glow: none;
+
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Tema Claro (Alternativo) */
+[data-theme="light"] {
+  --bg-body: #f8fafc;
+  --bg-card: rgba(255, 255, 255, 0.85);
+  --bg-card-hover: rgba(255, 255, 255, 1);
+  --bg-card-solid: #ffffff;
+  --bg-input: #f1f5f9;
+  --bg-nav: rgba(248, 250, 252, 0.85);
+
+  --border-subtle: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.14);
+  --border-hover: rgba(5, 150, 105, 0.4);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #64748b;
+  --text-accent: #059669;
+
+  --accent-primary: #059669;
+  --accent-secondary: #047857;
+  --accent-hover: #047857;
+  --accent-glow: rgba(5, 150, 105, 0.18);
+  --accent-light: rgba(5, 150, 105, 0.08);
+
+  --badge-bg: rgba(5, 150, 105, 0.08);
+  --badge-text: #065f46;
+  --badge-border: rgba(5, 150, 105, 0.2);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  --shadow-glow: 0 10px 30px -5px rgba(5, 150, 105, 0.15);
+}
+

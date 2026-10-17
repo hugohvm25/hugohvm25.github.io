@@ -1,0 +1,95 @@
+/* Grid discreto e scanner compartilhados pelos cards do site. */
+.profile-card,
+.highlight-card,
+.project-card,
+.skill-tile,
+.contact-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  background-color: var(--bg-card);
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.profile-card:hover,
+.highlight-card:hover,
+.project-card:hover,
+.skill-tile:hover,
+.contact-card:hover {
+  background-color: var(--bg-card-hover);
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
+
+.profile-card::after,
+.highlight-card::after,
+.project-card::after,
+.skill-tile::after,
+.contact-card::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--firefly-color) 20%,
+    var(--accent-primary) 50%,
+    var(--firefly-color) 80%,
+    transparent
+  );
+  box-shadow: 0 0 12px var(--firefly-color);
+}
+
+.profile-card:hover::after,
+.highlight-card:hover::after,
+.project-card:hover::after,
+.skill-tile:hover::after,
+.contact-card:hover::after,
+.profile-card:focus-within::after,
+.highlight-card:focus-within::after,
+.project-card:focus-within::after,
+.skill-tile:focus-within::after,
+.contact-card:focus-within::after {
+  animation: card-scanner-sweep 1.2s ease-in-out;
+}
+
+@keyframes card-scanner-sweep {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10%,
+  85% {
+    opacity: 0.9;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .profile-card:hover::after,
+  .highlight-card:hover::after,
+  .project-card:hover::after,
+  .skill-tile:hover::after,
+  .contact-card:hover::after,
+  .profile-card:focus-within::after,
+  .highlight-card:focus-within::after,
+  .project-card:focus-within::after,
+  .skill-tile:focus-within::after,
+  .contact-card:focus-within::after {
+    animation: none;
+  }
+}

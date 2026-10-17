@@ -44,8 +44,8 @@ const BackgroundParticlesModule = {
           x: Math.random() * width,
           y: Math.random() * height,
           radius: firefly ? 0.8 + Math.random() * 2.1 : 0.6 + Math.random() * 0.8,
-          speedX: (Math.random() - 0.5) * (firefly ? 1 : 0.18),
-          speedY: (Math.random() - 0.5) * (firefly ? 1 : 0.18),
+          speedX: (Math.random() - 0.5) * (firefly ? 0.8 : 0.18),
+          speedY: (Math.random() - 0.5) * (firefly ? 0.8 : 0.18),
           phase: Math.random() * Math.PI * 2,
           firefly
         });

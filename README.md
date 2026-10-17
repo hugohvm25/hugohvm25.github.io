@@ -14,6 +14,8 @@ Desenvolvido para ser leve, direto ao ponto, responsivo e sem sobrecarga visual 
 - **Interações Suaves**:
   - Fundo animado com partículas verde-escuras e pontos luminosos em verde-claro.
   - Gradiente verde animado no nome principal, seguindo o ponteiro do mouse.
+  - Cards com grade verde discreta, cantos retos e scanner animado no hover.
+  - Stack apresentada em cards individuais por tecnologia, organizados em grade responsiva.
   - Badge pulsante de status ("Disponível para novos projetos").
   - Botão interativo de copiar e-mail com 1 clique e feedback instantâneo.
   - Painel de atividade pública do GitHub atualizado automaticamente a cada 5 minutos.
@@ -42,9 +44,11 @@ hugohvm25.github.io/
 │   ├── main.css               # Ponto central que importa os módulos
 │   ├── variables.css          # Design tokens (cores, espaçamentos, temas)
 │   ├── base.css               # Reset, tipografia base e container
+│   ├── grain.css              # Textura granulada sutil sobre o fundo
 │   ├── components.css         # Botões, badges, status pill
 │   ├── cursor.css             # Cursor personalizado para mouse/trackpad
 │   ├── particles.css          # Camada de fundo para partículas animadas
+│   ├── card-effects.css       # Grade e scanner animado dos cards
 │   ├── header.css             # Navbar, logo, dark toggle, menu mobile
 │   ├── hero.css               # Apresentação principal e card de perfil
 │   ├── about.css              # Seção sobre mim e destaques

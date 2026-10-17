@@ -1,4 +1,4 @@
-/* Grid discreto e scanner compartilhados pelos cards do site. */
+/* Scanner compartilhado pelos cards do site. */
 .profile-card,
 .highlight-card,
 .project-card,
@@ -8,10 +8,7 @@
   overflow: hidden;
   border-radius: 0;
   background-color: var(--bg-card);
-  background-image:
-    linear-gradient(rgba(var(--accent-rgb), 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-image: none;
 }
 
 .profile-card:hover,
@@ -20,10 +17,7 @@
 .skill-tile:hover,
 .contact-card:hover {
   background-color: var(--bg-card-hover);
-  background-image:
-    linear-gradient(rgba(var(--accent-rgb), 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(var(--accent-rgb), 0.12) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background-image: none;
 }
 
 .profile-card::after,

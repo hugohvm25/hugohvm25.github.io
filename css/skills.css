@@ -53,13 +53,14 @@
 .skill-tile-watermark {
   position: absolute;
   z-index: 0;
-  right: 0.25rem;
-  bottom: 0.25rem;
+  right: -1rem;
+  bottom: -1rem;
   width: clamp(8rem, 12vw, 11rem);
   height: clamp(8rem, 12vw, 11rem);
   color: var(--firefly-color);
-  opacity: 0.12;
+  opacity: 0.08;
   pointer-events: none;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
 
 .skill-tile-heading {
@@ -92,8 +93,20 @@
   vector-effect: non-scaling-stroke;
 }
 
+.skill-tile-watermark path:not([fill="none"]),
+.skill-tile-watermark rect:not([fill="none"]),
+.skill-tile-watermark circle:not([fill="none"]) {
+  fill: currentColor;
+}
+
 .skill-tile:hover {
   border-color: var(--border-hover);
+}
+
+.skill-tile:hover .skill-tile-watermark,
+.skill-tile:focus-within .skill-tile-watermark {
+  opacity: 0.18;
+  transform: translate(-1.25rem, -1.25rem) scale(1.06);
 }
 
 .skill-tile-name {
@@ -148,5 +161,16 @@
 @media (max-width: 360px) {
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-tile-watermark {
+    transition: none;
+  }
+
+  .skill-tile:hover .skill-tile-watermark,
+  .skill-tile:focus-within .skill-tile-watermark {
+    transform: none;
   }
 }

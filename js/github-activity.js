@@ -2,8 +2,15 @@ const GithubActivityModule = {
   username: 'hugohvm25',
   firstContributionYear: 2023,
   refreshInterval: 5 * 60 * 1000,
+  requestTimeout: 20 * 1000,
+  // Servico de terceiros. Somente dados publicos; sem token no navegador.
+  // Documentacao: https://github.com/grubersjoe/github-contributions-api
+  // O servico mantem cache por aproximadamente uma hora.
+  contributionsApi: 'https://github-contributions-api.jogruber.de/v4',
 
   init() {
+    if (this.initialized) return;
+
     this.totalCount = document.getElementById('github-total-count');
     this.yearCount = document.getElementById('github-year-count');
     this.monthCount = document.getElementById('github-month-count');
@@ -13,16 +20,28 @@ const GithubActivityModule = {
     this.status = document.getElementById('github-activity-status');
 
     if (!this.totalCount || !this.yearCount || !this.monthCount || !this.todayCount ||
-        !this.commitLink || !this.commitMeta || !this.status) return;
+        !this.commitLink || !this.commitMeta || !this.status) {
+      console.warn('GitHub activity: faltam elementos HTML com os IDs esperados.');
+      return;
+    }
+    this.initialized = true;
+
+    // Estes textos dinamicos sao traduzidos por render(), nao pelo i18n generico.
+    [this.commitLink, this.commitMeta, this.status].forEach(element => {
+      element.removeAttribute('data-i18n');
+    });
 
     this.lastUpdated = null;
     this.refreshPromise = null;
     this.hasError = false;
     this.latestCommit = null;
+    this.commitLoaded = false;
+    this.commitError = null;
+    this.statsError = null;
     this.language = document.documentElement.lang === 'en' ? 'en' : 'pt';
 
     document.addEventListener('portfolio-language-change', event => {
-      this.language = event.detail.lang;
+      this.language = event.detail?.lang === 'en' ? 'en' : 'pt';
       this.render();
     });
     document.addEventListener('visibilitychange', () => {
@@ -42,18 +61,22 @@ const GithubActivityModule = {
       pt: {
         loading: 'Carregando atividade...',
         noCommit: 'Nenhum commit público recente encontrado',
+        commitUnavailable: 'Não foi possível carregar o último commit.',
+        timeout: 'A consulta demorou demais. Tente novamente mais tarde.',
         updated: 'Atualizado às',
         updateError: 'Não foi possível atualizar todos os dados do GitHub.',
         totalUnavailable: 'Total indisponível',
-        rateLimit: 'O GitHub limitou temporariamente as consultas. Tente novamente mais tarde.'
+        rateLimit: 'O serviço limitou temporariamente as consultas. Tente novamente mais tarde.'
       },
       en: {
         loading: 'Loading activity...',
         noCommit: 'No recent public commit found',
+        commitUnavailable: 'Could not load the latest commit.',
+        timeout: 'The request timed out. Please try again later.',
         updated: 'Updated at',
         updateError: 'Could not refresh all GitHub data.',
         totalUnavailable: 'Total unavailable',
-        rateLimit: 'GitHub temporarily rate-limited requests. Please try again later.'
+        rateLimit: 'The service temporarily rate-limited requests. Please try again later.'
       }
     };
     return translations[this.language][key];
@@ -80,89 +103,97 @@ const GithubActivityModule = {
     return `${year}-${month}-${day}`;
   },
 
-  async fetchContributionPage(url, year) {
-    const response = await fetch(
-      url,
-      { headers: { 'Accept-Language': 'en' }, cache: 'no-store' }
-    );
-    if (!response.ok) {
-      throw new Error(`GitHub contributions request failed with status ${response.status}`);
+  async fetchJSON(url, options = {}) {
+    const controller = new AbortController();
+    const timeoutId = window.setTimeout(() => controller.abort(), this.requestTimeout);
+
+    try {
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      });
+
+      if (!response.ok) {
+        const rateLimited = response.status === 429 ||
+          (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0');
+        throw new Error(rateLimited
+          ? this.translate('rateLimit')
+          : `GitHub activity: HTTP ${response.status} (${new URL(url).hostname})`);
+      }
+      return await response.json();
+    } catch (error) {
+      if (error.name === 'AbortError') {
+        throw new Error(this.translate('timeout'));
+      }
+      throw error;
+    } finally {
+      window.clearTimeout(timeoutId);
     }
-
-    const html = await response.text();
-    const page = new DOMParser().parseFromString(html, 'text/html');
-    const heading = page.getElementById('js-contribution-activity-description')?.textContent || '';
-    const totalMatch = heading.match(/([\d,]+)\s+contributions?\s+in\s+(?:the last year|(\d{4}))/i);
-    if (!totalMatch || (year && totalMatch[2] !== String(year))) {
-      throw new Error(`GitHub contribution total${year ? ` for ${year}` : ''} was not found in the profile response`);
-    }
-
-    const tooltips = new Map(
-      Array.from(page.querySelectorAll('tool-tip[for]'), tooltip => [
-        tooltip.getAttribute('for'),
-        tooltip.textContent.trim()
-      ])
-    );
-    const dailyCounts = Array.from(page.querySelectorAll('.ContributionCalendar-day[data-date]'), day => {
-      const tooltip = tooltips.get(day.id) || '';
-      const countMatch = tooltip.match(/^([\d,]+)\s+contributions?\s+on/i);
-      return {
-        date: day.getAttribute('data-date'),
-        count: countMatch ? Number(countMatch[1].replace(/,/g, '')) : 0
-      };
-    });
-
-    return {
-      total: Number(totalMatch[1].replace(/,/g, '')),
-      dailyCounts
-    };
-  },
-
-  fetchContributionYear(year) {
-    return this.fetchContributionPage(
-      `https://github.com/users/${this.username}/contributions?from=${year}-01-01&to=${year}-12-31&refresh=${Date.now()}`,
-      year
-    );
   },
 
   async fetchContributionStats() {
-    const currentYear = new Date().getFullYear();
-    const years = Array.from(
-      { length: currentYear - this.firstContributionYear + 1 },
-      (_, index) => this.firstContributionYear + index
-    );
-    const [yearlyResults, rollingStats] = await Promise.all([
-      Promise.all(years.map(year => this.fetchContributionYear(year))),
-      this.fetchContributionPage(
-        `https://github.com/users/${this.username}/contributions?refresh=${Date.now()}`
-      )
+    const username = encodeURIComponent(this.username);
+    const baseUrl = `${this.contributionsApi}/${username}`;
+
+    // y=all fornece os totais por ano; y=last preserva a janela do GitHub.
+    // Nao usamos Date.now() ou no-store: respeitamos o cache do servico.
+    const [history, rolling] = await Promise.all([
+      this.fetchJSON(`${baseUrl}?y=all`),
+      this.fetchJSON(`${baseUrl}?y=last`)
     ]);
-    const today = this.getLocalDateString(new Date());
+
+    const isCount = value => Number.isSafeInteger(value) && value >= 0;
+    if (!history?.total || typeof history.total !== 'object' ||
+        Array.isArray(history.total) || !isCount(rolling?.total?.lastYear) ||
+        !Array.isArray(rolling?.contributions) || !rolling.contributions.length) {
+      throw new Error('GitHub activity: resposta de contribuicoes invalida.');
+    }
+
+    const dailyCounts = rolling.contributions;
+    const validDays = dailyCounts.every(day => day &&
+      typeof day.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(day.date) &&
+      isCount(day.count));
+    const annualTotals = Object.entries(history.total)
+      .filter(([year]) => /^\d{4}$/.test(year));
+
+    if (!validDays || !annualTotals.length ||
+        !annualTotals.every(([, count]) => isCount(count))) {
+      throw new Error('GitHub activity: contagens de contribuicoes invalidas.');
+    }
+
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    const today = this.getLocalDateString(now);
     const monthPrefix = today.slice(0, 7);
+    const monthDays = dailyCounts.filter(day =>
+      day.date.startsWith(monthPrefix) && day.date <= today);
+    const todayEntry = dailyCounts.find(day => day.date === today);
 
     return {
-      total: yearlyResults.reduce((sum, result) => sum + result.total, 0),
-      year: rollingStats.total,
-      month: rollingStats.dailyCounts
-        .filter(day => day.date.startsWith(monthPrefix))
-        .reduce((total, day) => total + day.count, 0),
-      today: rollingStats.dailyCounts.find(day => day.date === today)?.count || 0
+      // Mantem a configuracao original: total a partir de 2023.
+      total: annualTotals
+        .filter(([year]) => Number(year) >= this.firstContributionYear &&
+          Number(year) <= currentYear)
+        .reduce((sum, [, count]) => sum + count, 0),
+      year: rolling.total.lastYear,
+      month: monthDays.length
+        ? monthDays.reduce((sum, day) => sum + day.count, 0)
+        : null,
+      // Data ausente nao significa zero: pode haver atraso no cache.
+      today: todayEntry ? todayEntry.count : null
     };
   },
 
   async fetchLatestCommit() {
-    const eventsResponse = await fetch(
-      `https://api.github.com/search/commits?q=author%3A${this.username}&sort=author-date&order=desc&per_page=1&refresh=${Date.now()}`,
-      { headers: { Accept: 'application/vnd.github+json' }, cache: 'no-store' }
+    const query = encodeURIComponent(`author:${this.username}`);
+    const result = await this.fetchJSON(
+      `https://api.github.com/search/commits?q=${query}&sort=author-date&order=desc&per_page=1`,
+      { headers: { Accept: 'application/vnd.github+json' } }
     );
-    if (eventsResponse.status === 403 || eventsResponse.status === 429) {
-      throw new Error(this.translate('rateLimit'));
-    }
-    if (!eventsResponse.ok) {
-      throw new Error(`GitHub commit search failed with status ${eventsResponse.status}`);
-    }
 
-    const result = await eventsResponse.json();
+    if (!Array.isArray(result?.items) || result.incomplete_results) {
+      throw new Error('GitHub activity: resposta de commits invalida ou incompleta.');
+    }
     const commit = result.items?.[0];
     if (!commit) return null;
 
@@ -171,11 +202,20 @@ const GithubActivityModule = {
       throw new Error('GitHub returned an invalid commit URL');
     }
 
+    if (typeof commit.commit?.message !== 'string' ||
+        typeof commit.repository?.full_name !== 'string' || typeof commit.sha !== 'string') {
+      throw new Error('GitHub activity: commit com campos invalidos.');
+    }
+    const date = new Date(commit.commit.author?.date || commit.commit.committer?.date);
+    if (Number.isNaN(date.getTime())) {
+      throw new Error('GitHub activity: data do commit invalida.');
+    }
+
     return {
       message: commit.commit.message.split('\n')[0],
       repository: commit.repository.full_name,
       sha: commit.sha,
-      date: new Date(commit.commit.author?.date || commit.commit.committer?.date),
+      date,
       url: commitUrl.href
     };
   },
@@ -191,11 +231,16 @@ const GithubActivityModule = {
       results.forEach((result, index) => {
         if (result.status === 'rejected') {
           this.hasError = true;
+          if (index === 0) this.statsError = result.reason;
+          else this.commitError = result.reason;
           console.error('GitHub activity update failed:', result.reason);
         } else if (index === 0) {
           this.stats = result.value;
+          this.statsError = null;
         } else {
           this.latestCommit = result.value;
+          this.commitLoaded = true;
+          this.commitError = null;
         }
       });
 
@@ -212,10 +257,12 @@ const GithubActivityModule = {
 
   render() {
     if (this.stats) {
-      this.totalCount.textContent = this.formatNumber(this.stats.total);
-      this.yearCount.textContent = this.formatNumber(this.stats.year);
-      this.monthCount.textContent = this.formatNumber(this.stats.month);
-      this.todayCount.textContent = this.formatNumber(this.stats.today);
+      const formatCount = value => value === null || value === undefined
+        ? '—' : this.formatNumber(value);
+      this.totalCount.textContent = formatCount(this.stats.total);
+      this.yearCount.textContent = formatCount(this.stats.year);
+      this.monthCount.textContent = formatCount(this.stats.month);
+      this.todayCount.textContent = formatCount(this.stats.today);
     }
 
     if (this.latestCommit) {
@@ -225,7 +272,9 @@ const GithubActivityModule = {
         `${this.latestCommit.repository} · ${this.latestCommit.sha.slice(0, 7)} · ` +
         this.formatDate(this.latestCommit.date);
     } else {
-      this.commitLink.textContent = this.translate(this.lastUpdated ? 'noCommit' : 'loading');
+      const key = this.commitError ? 'commitUnavailable'
+        : this.commitLoaded ? 'noCommit' : 'loading';
+      this.commitLink.textContent = this.translate(key);
       this.commitLink.href = `https://github.com/${this.username}`;
       this.commitMeta.textContent = '';
     }
@@ -244,4 +293,9 @@ const GithubActivityModule = {
   }
 };
 
-document.addEventListener('DOMContentLoaded', () => GithubActivityModule.init());
+// Funciona tanto durante a leitura do HTML quanto apos DOMContentLoaded.
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => GithubActivityModule.init(), { once: true });
+} else {
+  GithubActivityModule.init();
+}

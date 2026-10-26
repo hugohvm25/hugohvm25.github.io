@@ -257,7 +257,7 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-full);
-  padding: 3px 5px;
+  padding: 8px 8px;
   gap: 2px;
 }
 
@@ -269,7 +269,7 @@
   font-size: 0.72rem;
   font-weight: 700;
   cursor: pointer;
-  padding: 4px 8px;
+  padding: 8px 8px;
   border-radius: var(--radius-full);
   transition: all var(--transition-fast);
   line-height: 1;

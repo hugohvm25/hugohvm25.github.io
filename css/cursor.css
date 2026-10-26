@@ -66,9 +66,7 @@
   }
 }
 
-[data-theme="light"] #cursor {
-  mix-blend-mode: multiply;
-}
+
 
 @keyframes custom-cursor-spin {
   to {

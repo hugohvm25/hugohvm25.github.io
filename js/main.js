@@ -13,5 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof I18nModule !== 'undefined') I18nModule.init();
   if (typeof ScrambleModule !== 'undefined') ScrambleModule.init();
   if (typeof SkillsCarouselModule !== 'undefined') SkillsCarouselModule.init();
+  if (typeof SectionGlowModule !== 'undefined') SectionGlowModule.init();
   if (typeof ScrollBlurModule !== 'undefined') ScrollBlurModule.init();
 });

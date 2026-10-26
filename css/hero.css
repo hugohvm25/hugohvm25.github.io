@@ -3,7 +3,7 @@
    ========================================================================== */
 
 .hero {
-  padding: 8.5rem 0 5rem;
+  padding: 15rem 0 5rem;
 }
 
 .hero-grid {
@@ -89,7 +89,7 @@
   align-items: center;
   gap: 2rem;
   width: 100%;
-  font-size: clamp(1.5rem, 2.5vw, 0.98rem);
+  font-size: clamp(1rem, 2.5vw, 0.98rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-secondary);
@@ -195,14 +195,9 @@
   border-color: var(--accent-primary);
 }
 
-[data-theme="light"] .btn-projects {
-  color: var(--accent-primary);
-}
 
-[data-theme="light"] .btn-projects:hover,
-[data-theme="light"] .btn-projects:focus-visible {
-  color: #ffffff;
-}
+
+
 
 .btn-projects:hover::before,
 .btn-projects:focus-visible::before {

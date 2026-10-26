@@ -27,6 +27,7 @@
 </head>
 
 <body>
+    <div id="section-glow" aria-hidden="true"></div>
 
     <!-- Cabeçalho & Navegação Fixa -->
         <header class="header">
@@ -98,35 +99,7 @@
                     <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
                 </div>
 
-                <!-- Alternador de Tema (Dark / Light) -->
-                <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema claro e escuro">
-                    <!-- Ícone Lua (Modo Escuro) -->
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                    <!-- Ícone Sol (Modo Claro) -->
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                </button>
 
-                <!-- Botão CTA Let's Connect / Fale Comigo -->
-                <a href="#contato" class="btn-connect" aria-label="Contato">
-                    <span data-i18n="nav.cta">Fale Comigo</span>
-                    <svg class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
-                        <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
-                    </svg>
-                </a>
 
                 <!-- Botão Menu Mobile -->
                 <button id="mobile-toggle" class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
@@ -201,7 +174,7 @@
         <section class="section" id="sobre">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag" data-i18n="about.tag">Apresentação</span>
+                    <span class="section-tag scroll-blur-title" data-i18n="about.tag">Apresentação</span>
                     <h2 class="section-title scroll-blur-title" data-i18n="about.title">Sobre Mim</h2>
                 </div>
 
@@ -284,7 +257,7 @@
         <section class="section" id="projetos">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag" data-i18n="projects.tag">Portfólio</span>
+                    <span class="section-tag scroll-blur-title" data-i18n="projects.tag">Portfólio</span>
                     <h2 class="section-title scroll-blur-title" data-i18n="projects.title">Projetos em Destaque</h2>
                     <p class="section-description" data-i18n="projects.desc">
                         Algumas soluções e projetos que desenvolvi com foco em usabilidade, arquitetura limpa e
@@ -438,8 +411,8 @@
         <section class="section" id="stack">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag" data-i18n="stack.tag">Competências</span>
-                    <h2 class="section-title" data-i18n="stack.title">Stack & Ferramentas</h2>
+                    <span class="section-tag scroll-blur-title" data-i18n="stack.tag">Competências</span>
+                    <h2 class="section-title scroll-blur-title" data-i18n="stack.title">Stack & Ferramentas</h2>
                     <p class="section-description" data-i18n="stack.desc">
                         Tecnologias que utilizo no dia a dia para construir soluções eficientes do frontend ao deploy.
                     </p>
@@ -745,7 +718,7 @@
 
 
 
-        <section class="github-activity" aria-labelledby="github-activity-title">
+        <section class="github-activity scroll-blur-title" aria-labelledby="github-activity-title">
             <header class="github-activity-header">
                 <h3 class="github-activity-title" id="github-activity-title">
                     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -757,7 +730,7 @@
                 </h3>
                 <span class="github-activity-indicator" aria-hidden="true"></span>
             </header>
-            <div class="github-activity-grid">
+            <div class="github-activity-grid ">
                 <div class="github-activity-stat">
                     <span class="github-activity-label" data-i18n="github.total">Total</span>
                     <strong class="github-activity-value" id="github-total-count">—</strong>
@@ -819,6 +792,7 @@
     <script src="js/skills-carousel.js"></script>
     <script src="js/cursor.js"></script>
     <script src="js/github-activity.js"></script>
+    <script src="js/section-glow.js"></script>
     <script src="js/scroll-blur.js"></script>
     <script src="js/hero-name-gradient.js"></script>
 </body>

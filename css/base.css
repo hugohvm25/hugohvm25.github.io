@@ -93,27 +93,46 @@ body > footer {
 }
 
 /* Scroll blur — títulos ganham foco ao centro do viewport */
-/* Hover nos títulos com scroll-blur: destaque com fundo + nitidez total */
 .scroll-blur-title {
   will-change: filter, opacity;
-  transition: filter 0.15s ease-out, opacity 0.15s ease-out, background-color 0.25s ease, border-radius 0.25s ease, padding 0.25s ease;
-  border-radius: 0.25rem;
-  padding: 0.1rem 0;
-  cursor: default;
-}
-
-.scroll-blur-title:hover {
-  filter: blur(0px) !important;
-  opacity: 1 !important;
-  background-color: rgba(var(--accent-rgb), 0.10);
-  border-radius: 0.5rem;
-  padding: 0.15rem 0.6rem;
+  transition: filter 0.15s ease-out, opacity 0.15s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .scroll-blur-title {
     transition: none;
   }
+}
+
+/* Glow de seção — fundo colorido conforme a seção ativa */
+#section-glow {
+  position: fixed;
+  top: -10%;
+  left: 0;
+  right: 0;
+  height: 65vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  background: radial-gradient(ellipse 100% 100% at 50% 0%, transparent 0%, transparent 100%);
+  transition: background 1.1s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity    0.7s ease;
+}
+
+#section-glow.is-active {
+  opacity: 1;
+}
+
+/* Pulso durante a transição entre seções */
+@keyframes glow-pulse {
+  0%   { opacity: 1; }
+  40%  { opacity: 1.0; filter: brightness(1.6); }
+  100% { opacity: 1; filter: brightness(1); }
+}
+
+#section-glow.is-pulsing {
+  animation: glow-pulse 0.9s ease forwards;
+}
 }
 
 @media (max-width: 768px) {

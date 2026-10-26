@@ -22,35 +22,40 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="css/main.css">
+    <link rel="shortcut icon" href="assets/images/lambda.png" type="image/png"/>
+    
 </head>
 
 <body>
 
     <!-- Cabeçalho & Navegação Fixa -->
-    <header class="header">
-
-        <div class="container nav">
+        <header class="header">
+        <div class="nav">
             <a href="#" class="nav-brand" aria-label="Início">
-                <img src="assets/images/lambda.png" alt="Logo Lambda" class="brand-logo">
+                <div class="brand-avatar">
+                    <img src="assets/images/lambda_puro.png" alt="Hugo Verissimo" class="brand-logo">
+                </div>
+                <span class="brand-name">Hugo Verissimo</span>
             </a>
 
-            <!-- Menu de Links -->
+            <!-- Menu de Links com contorno redondo (Pill) e animação contínua -->
             <ul class="nav-links" id="nav-links" role="navigation">
                 <li><a href="#sobre" class="nav-link"><span data-i18n="nav.about">Sobre</span><svg
-                            class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none"
-                            aria-hidden="true"></svg>
-                        <rect x="0.5" y="0.5" width="99" height="39" rx="5" pathLength="100"></rect>
-                        </svg>
-                    </a></li>
+                            class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                            <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
+                        </svg></a></li>
                 <li><a href="#projetos" class="nav-link"><span data-i18n="nav.projects">Projetos</span><svg
                             class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
-                            <rect x="0.5" y="0.5" width="99" height="39" rx="5" pathLength="100"></rect>
+                            <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
                         </svg></a></li>
                 <li><a href="#stack" class="nav-link"><span data-i18n="nav.stack">Stack</span><svg
                             class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
-                            <rect x="0.5" y="0.5" width="99" height="39" rx="5" pathLength="100"></rect>
+                            <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
                         </svg></a></li>
-
+                <li><a href="#contato" class="nav-link"><span data-i18n="nav.contact">Contato</span><svg
+                            class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                            <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
+                        </svg></a></li>
             </ul>
 
             <!-- Ações do Menu -->
@@ -115,7 +120,13 @@
                     </svg>
                 </button>
 
-                <!-- <a href="#contato" class="btn btn-primary btn-sm" data-i18n="nav.cta">Fale Comigo</a> -->
+                <!-- Botão CTA Let's Connect / Fale Comigo -->
+                <a href="#contato" class="btn-connect" aria-label="Contato">
+                    <span data-i18n="nav.cta">Fale Comigo</span>
+                    <svg class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                        <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100"></rect>
+                    </svg>
+                </a>
 
                 <!-- Botão Menu Mobile -->
                 <button id="mobile-toggle" class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
@@ -153,15 +164,13 @@
                             <span>MELLO</span>
                         </div>
                     </div>
-
-                    <br>
                     <!-- Roleta de Código (Estilo Ruben Marcus) -->
                     <div class="hero-scramble-box" aria-label="Especialidades">
                         <span class="scramble-prompt" aria-hidden="true">&gt;</span>
                         <span class="scramble-text" id="code-roulette">aplicações web full stack</span>
                     </div>
 
-                    <h2 class="hero-title" data-i18n="hero.title">
+                    <h2 class="hero-title scroll-blur-title" data-i18n="hero.title">
                         Desenvolvedor <span class="highlight">Full Stack</span> criando produtos de alto impacto.
                     </h2>
 
@@ -193,7 +202,7 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag" data-i18n="about.tag">Apresentação</span>
-                    <h2 class="section-title" data-i18n="about.title">Sobre Mim</h2>
+                    <h2 class="section-title scroll-blur-title" data-i18n="about.title">Sobre Mim</h2>
                 </div>
 
                 <div class="about-grid">
@@ -276,7 +285,7 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag" data-i18n="projects.tag">Portfólio</span>
-                    <h2 class="section-title" data-i18n="projects.title">Projetos em Destaque</h2>
+                    <h2 class="section-title scroll-blur-title" data-i18n="projects.title">Projetos em Destaque</h2>
                     <p class="section-description" data-i18n="projects.desc">
                         Algumas soluções e projetos que desenvolvi com foco em usabilidade, arquitetura limpa e
                         tecnologias modernas.
@@ -810,6 +819,7 @@
     <script src="js/skills-carousel.js"></script>
     <script src="js/cursor.js"></script>
     <script src="js/github-activity.js"></script>
+    <script src="js/scroll-blur.js"></script>
     <script src="js/hero-name-gradient.js"></script>
 </body>
 

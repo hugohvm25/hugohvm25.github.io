@@ -3,18 +3,23 @@
    ========================================================================== */
 
 .hero {
-  padding: 6.5rem 0 5rem;
+  padding: 8.5rem 0 5rem;
 }
 
 .hero-grid {
-  display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 3.5rem;
+  text-align: center;
 }
 
 .hero-content {
-  min-width: 0;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .highlight {
@@ -26,10 +31,11 @@
 
 /* Bloco do Nome com Largura Sincronizada */
 .hero-name-wrapper {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
+  align-items: center;
   width: fit-content;
-  margin-bottom: 1.5rem;
+  margin: 0 auto 1.5rem;
 }
 
 .hero-name-first {
@@ -79,14 +85,15 @@
 
 .hero-name-last {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 2rem;
   width: 100%;
   font-size: clamp(1.5rem, 2.5vw, 0.98rem);
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-secondary);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-top: 0.5rem;
   line-height: 1;
 }
@@ -159,6 +166,7 @@
   flex-wrap: wrap;
   gap: 1rem;
   margin-bottom: 2.5rem;
+  justify-content: center;
 }
 
 .btn-projects {
@@ -209,6 +217,7 @@
 .hero-socials {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1.25rem;
   padding-top: 1.5rem;
   border-top: 1px solid var(--border-subtle);
@@ -360,15 +369,8 @@
 }
 
 @media (max-width: 860px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
-  }
-
   .hero-content {
     max-width: 100%;
-    margin: 0 auto;
   }
 
   .hero-cta {

@@ -89,7 +89,7 @@ const I18nModule = {
       'nav.projects': 'Projects',
       'nav.stack': 'Stack',
       'nav.contact': 'Contact',
-      'nav.cta': 'Get in Touch',
+      'nav.cta': "Let's Connect",
 
       // Hero
       'hero.status': 'Available for new projects',

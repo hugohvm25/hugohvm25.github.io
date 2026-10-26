@@ -26,8 +26,6 @@
   --accent-hover: #215D1F;
   --accent-glow: transparent;
   --accent-light: rgba(33, 93, 31, 0.12);
-  --particle-color: #0b210a;
-  --firefly-color: #a0ff83;
 
   --badge-bg: rgba(33, 93, 31, 0.1);
   --badge-text: #215D1F;
@@ -77,8 +75,6 @@
   --accent-hover: #215D1F;
   --accent-glow: rgba(33, 93, 31, 0.18);
   --accent-light: rgba(33, 93, 31, 0.08);
-  --particle-color: #173516;
-  --firefly-color: #4d9d3e;
 
   --badge-bg: rgba(33, 93, 31, 0.08);
   --badge-text: #215D1F;

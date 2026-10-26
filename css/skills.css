@@ -1,23 +1,33 @@
 /* ==========================================================================
-   SEÇÃO TECNOLOGIAS & FERRAMENTAS (STACK)
+   SEÇÃO TECNOLOGIAS & FERRAMENTAS (STACK) - CARROSSEL CONTÍNUO (MARQUEE)
+   Linhas alternadas com direções desencontradas (direita / esquerda) e
+   movimento lento, fluido e contínuo.
    ========================================================================== */
 
 .skill-groups {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: 2.25rem;
+}
+
+.skill-group-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .skill-group-title {
   display: flex;
   align-items: center;
   gap: 1rem;
-  margin-bottom: 1rem;
+  flex: 1 1 auto;
+  min-width: 0;
   color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  line-height: 1.3;
+  line-height: 1;
   text-transform: uppercase;
 }
 
@@ -28,21 +38,117 @@
   background: linear-gradient(90deg, var(--accent-primary), rgba(var(--accent-rgb), 0.12));
 }
 
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--border-subtle);
-  border-left: 1px solid var(--border-subtle);
+/* --------------------------------------------------------------------------
+   ESTRUTURA DO CARROSSEL INFINITO (MARQUEE)
+   -------------------------------------------------------------------------- */
+
+.skills-marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: 0.6rem 0 1rem;
+  margin: 0;
+  user-select: none;
+  /* Máscara de fade suave nas bordas esquerda e direita */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 48px,
+    black calc(100% - 48px),
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 48px,
+    black calc(100% - 48px),
+    transparent 100%
+  );
 }
+
+/* Fallback antes da inicialização do JS ou sem JS */
+.skills-marquee:not(.is-initialized) {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.skills-marquee:not(.is-initialized)::-webkit-scrollbar {
+  display: none;
+}
+
+.skills-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   ANIMAÇÕES DE LOOP CONTÍNUO (DIREITA / ESQUERDA)
+   -------------------------------------------------------------------------- */
+
+@keyframes marquee-to-right {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes marquee-to-left {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.skills-marquee[data-direction="right"] .skills-marquee-track {
+  animation: marquee-to-right var(--marquee-duration, 50s) linear infinite;
+  animation-delay: var(--marquee-delay, 0s);
+}
+
+.skills-marquee[data-direction="left"] .skills-marquee-track {
+  animation: marquee-to-left var(--marquee-duration, 50s) linear infinite;
+  animation-delay: var(--marquee-delay, 0s);
+}
+
+/* Pausa suave no hover ou quando um card está focado pelo teclado */
+.skills-marquee:hover .skills-marquee-track,
+.skills-marquee:focus-within .skills-marquee-track,
+.skills-marquee.is-paused .skills-marquee-track {
+  animation-play-state: paused;
+}
+
+.skills-marquee-group {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+}
+
+/* --------------------------------------------------------------------------
+   CARD INDIVIDUAL DA TECNOLOGIA (SKILL TILE)
+   -------------------------------------------------------------------------- */
 
 .skill-tile {
   position: relative;
-  min-height: 250px;
-  padding: 1.25rem;
-  border-right: 1px solid var(--border-subtle);
-  border-bottom: 1px solid var(--border-subtle);
+  flex: 0 0 auto;
+  width: clamp(20rem, 18vw, 15rem);
+  min-height: 10.5rem;
+  margin-right: 0,1rem;
+  padding: 1.15rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-card);
+  overflow: hidden;
   isolation: isolate;
-  transition: background-color var(--transition-fast), border-color var(--transition-fast);
+  cursor: default;
+  transition: background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .skill-tile > :not(.skill-tile-watermark) {
@@ -55,10 +161,10 @@
   z-index: 0;
   right: -1rem;
   bottom: -1rem;
-  width: clamp(8rem, 12vw, 11rem);
-  height: clamp(8rem, 12vw, 11rem);
-  color: var(--firefly-color);
-  opacity: 0.08;
+  width: clamp(6.5rem, 10vw, 8.5rem);
+  height: clamp(6.5rem, 10vw, 8.5rem);
+  color: var(--accent-primary);
+  opacity: 0.1;
   pointer-events: none;
   transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
 }
@@ -77,11 +183,37 @@
   width: 1.75rem;
   height: 1.75rem;
   color: var(--text-primary);
-  transition: color var(--transition-fast);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.skill-tile-name {
+  position: relative;
+  min-width: 0;
+  color: var(--text-primary);
+  font-size: clamp(0.9rem, 1.15vw, 1.1rem);
+  font-weight: 800;
+  line-height: 1.2;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+/* Efeito Hover nos Cards */
+.skill-tile:hover {
+  border-color: var(--border-hover);
+  background-color: var(--bg-card-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.35), 0 0 16px rgba(var(--accent-rgb), 0.2);
 }
 
 .skill-tile:hover .skill-tile-icon {
   color: var(--accent-primary);
+  transform: scale(1.08);
+}
+
+.skill-tile:hover .skill-tile-watermark,
+.skill-tile:focus-within .skill-tile-watermark {
+  opacity: 0.22;
+  transform: translate(-0.85rem, -0.85rem) scale(1.08);
 }
 
 .skill-tile-watermark path,
@@ -99,49 +231,50 @@
   fill: currentColor;
 }
 
-.skill-tile:hover {
-  border-color: var(--border-hover);
-}
-
-.skill-tile:hover .skill-tile-watermark,
-.skill-tile:focus-within .skill-tile-watermark {
-  opacity: 0.18;
-  transform: translate(-1.25rem, -1.25rem) scale(1.06);
-}
-
-.skill-tile-name {
-  min-width: 0;
-  color: var(--text-primary);
-  font-size: clamp(0.9rem, 1.2vw, 1.15rem);
-  font-weight: 800;
-  line-height: 1.15;
-  text-transform: uppercase;
-  overflow-wrap: anywhere;
-}
+/* --------------------------------------------------------------------------
+   RESPONSIVO
+   -------------------------------------------------------------------------- */
 
 @media (max-width: 900px) {
-  .skills-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .skill-tile {
+    width: clamp(10.5rem, 24vw, 13rem);
+    min-height: 9.75rem;
   }
 }
 
 @media (max-width: 600px) {
-  .skills-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .skill-groups {
+    gap: 1.75rem;
   }
 
-  .skill-groups {
-    gap: 2rem;
+  .skills-marquee {
+    padding: 0.4rem 0 0.8rem;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 24px,
+      black calc(100% - 24px),
+      transparent 100%
+    );
   }
 
   .skill-tile {
-    min-height: 205px;
-    padding: 1rem;
+    width: clamp(9.5rem, 38vw, 11.5rem);
+    min-height: 9rem;
+    padding: 0.9rem;
+    margin-right: 0.75rem;
   }
 
   .skill-tile-watermark {
-    width: 7rem;
-    height: 7rem;
+    width: 5.75rem;
+    height: 5.75rem;
   }
 
   .skill-tile-heading {
@@ -158,13 +291,22 @@
   }
 }
 
-@media (max-width: 360px) {
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
-}
+/* --------------------------------------------------------------------------
+   ACESSIBILIDADE: PREFERS-REDUCED-MOTION
+   -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
+  .skills-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .skills-marquee-track {
+    animation: none !important;
+    transform: none !important;
+  }
+
   .skill-tile-watermark {
     transition: none;
   }
@@ -172,5 +314,10 @@
   .skill-tile:hover .skill-tile-watermark,
   .skill-tile:focus-within .skill-tile-watermark {
     transform: none;
+  }
+
+  .skill-tile {
+    transform: none !important;
+    transition: none;
   }
 }

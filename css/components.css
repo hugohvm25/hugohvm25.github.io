@@ -73,9 +73,9 @@
 }
 
 .status-pill:hover {
-  color: var(--firefly-color);
+  color: var(--accent-hover, #215D1F);
   background: rgba(var(--accent-rgb), 0.24);
-  border-color: var(--firefly-color);
+  border-color: var(--accent-primary);
   box-shadow: 0 0 14px rgba(var(--accent-rgb), 0.4);
   transform: translateY(-1px);
 }
@@ -90,8 +90,8 @@
 }
 
 .status-pill:hover .status-dot {
-  background-color: var(--firefly-color);
-  box-shadow: 0 0 8px var(--firefly-color);
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.6);
 }
 
 .status-dot::after {
@@ -109,7 +109,7 @@
 }
 
 .status-pill:hover .status-dot::after {
-  background-color: var(--firefly-color);
+  background-color: var(--accent-primary);
 }
 
 @keyframes pulse {

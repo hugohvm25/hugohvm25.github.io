@@ -1,9 +1,0 @@
-#particles-background {
-  display: block;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  #particles-background {
-    visibility: hidden;
-  }
-}

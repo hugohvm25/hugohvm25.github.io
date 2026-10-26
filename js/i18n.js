@@ -59,6 +59,8 @@ const I18nModule = {
       'stack.catBackend': 'Backend',
       'stack.catDb': 'Bancos de Dados',
       'stack.catTools': 'Ferramentas & Deploy',
+      'stack.carouselPrev': 'Ver tecnologias anteriores',
+      'stack.carouselNext': 'Ver próximas tecnologias',
 
       // Contato
       'contact.tag': 'Contato',
@@ -133,6 +135,8 @@ const I18nModule = {
       'stack.catBackend': 'Backend',
       'stack.catDb': 'Databases',
       'stack.catTools': 'Tools & Deploy',
+      'stack.carouselPrev': 'View previous technologies',
+      'stack.carouselNext': 'View next technologies',
 
       // Contact
       'contact.tag': 'Contact',
@@ -190,6 +194,14 @@ const I18nModule = {
       const key = el.getAttribute('data-i18n');
       if (texts[key]) {
         el.innerHTML = texts[key];
+      }
+    });
+
+    // Atualiza atributos de acessibilidade marcados com data-i18n-aria
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      if (texts[key]) {
+        el.setAttribute('aria-label', texts[key]);
       }
     });
 

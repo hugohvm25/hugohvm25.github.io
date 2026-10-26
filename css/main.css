@@ -12,7 +12,6 @@
 /* 3. Componentes Reutilizáveis (Botões, Badges, Status) */
 @import url('./components.css');
 @import url('./cursor.css');
-@import url('./particles.css');
 
 /* 4. Cabeçalho & Navegação */
 @import url('./header.css');

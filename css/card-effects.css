@@ -37,12 +37,12 @@
   background: linear-gradient(
     90deg,
     transparent,
-    var(--firefly-color) 20%,
+    rgba(var(--accent-rgb), 0.35) 20%,
     var(--accent-primary) 50%,
-    var(--firefly-color) 80%,
+    rgba(var(--accent-rgb), 0.35) 80%,
     transparent
   );
-  box-shadow: 0 0 12px var(--firefly-color);
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.5);
 }
 
 .profile-card:hover::after,

@@ -12,5 +12,5 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typeof TitleMarqueeModule !== 'undefined') TitleMarqueeModule.init();
   if (typeof I18nModule !== 'undefined') I18nModule.init();
   if (typeof ScrambleModule !== 'undefined') ScrambleModule.init();
+  if (typeof SkillsCarouselModule !== 'undefined') SkillsCarouselModule.init();
 });
-

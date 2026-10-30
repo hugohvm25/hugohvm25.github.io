@@ -58,19 +58,19 @@
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  padding: 0.22rem 0.65rem;
+  padding: 0.52rem 1.2rem;
   border-radius: var(--radius-full);
   background: var(--success-bg);
   border: 1px solid rgba(var(--accent-rgb), 0.18);
   color: var(--success-color);
-  font-size: 0.72rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 800;
   letter-spacing: 0.01em;
   margin-bottom: 1.5rem;
   box-shadow: none;
   transition: all var(--transition-fast);
   cursor: default;
-  opacity: 0.85;
+  opacity: 10.5;
 }
 
 .status-pill:hover {

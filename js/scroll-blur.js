@@ -1,6 +1,6 @@
 /**
  * ScrollBlurModule — Efeito de blur e desfoque em títulos conforme o scroll
- * Inspirado em devanshprakash.com: os títulos ficam nítidos ao centro do
+ * os títulos ficam nítidos ao centro do
  * viewport e se desfocam ao se afastar — superior ou inferior.
  */
 

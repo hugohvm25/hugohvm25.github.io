@@ -1,323 +1,213 @@
 /* ==========================================================================
-   SEÇÃO TECNOLOGIAS & FERRAMENTAS (STACK) - CARROSSEL CONTÍNUO (MARQUEE)
-   Linhas alternadas com direções desencontradas (direita / esquerda) e
-   movimento lento, fluido e contínuo.
-   ========================================================================== */
-
+SEÇÃO TECNOLOGIAS & FERRAMENTAS (STACK) - CARROSSEL INFINITO CONTÍNUO
+Centralizado, largura reduzida, sem pausa no hover, texto verde
+========================================================================== */
 .skill-groups {
   display: flex;
   flex-direction: column;
-  gap: 2.25rem;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.skill-group-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.85rem;
+.skill-group {
+  width: 100%;
+  max-width: 1300px; /* Largura reduzida */
+  margin: 0 auto;
 }
 
 .skill-group-title {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  flex: 1 1 auto;
-  min-width: 0;
   color: var(--text-primary);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   line-height: 1;
   text-transform: uppercase;
-}
-
-.skill-group-title::after {
-  content: '';
-  height: 1px;
-  flex: 1;
-  background: linear-gradient(90deg, var(--accent-primary), rgba(var(--accent-rgb), 0.12));
-}
-
-/* --------------------------------------------------------------------------
-   ESTRUTURA DO CARROSSEL INFINITO (MARQUEE)
-   -------------------------------------------------------------------------- */
-
-.skills-marquee {
-  position: relative;
-  overflow: hidden;
+  margin-bottom: 1rem;
+  text-align: center;
+  display: block;
   width: 100%;
-  padding: 0.6rem 0 1rem;
-  margin: 0;
-  user-select: none;
-  /* Máscara de fade suave nas bordas esquerda e direita */
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 48px,
-    black calc(100% - 48px),
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 48px,
-    black calc(100% - 48px),
-    transparent 100%
-  );
-}
-
-/* Fallback antes da inicialização do JS ou sem JS */
-.skills-marquee:not(.is-initialized) {
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.skills-marquee:not(.is-initialized)::-webkit-scrollbar {
-  display: none;
-}
-
-.skills-marquee-track {
-  display: flex;
-  width: max-content;
-  will-change: transform;
 }
 
 /* --------------------------------------------------------------------------
-   ANIMAÇÕES DE LOOP CONTÍNUO (DIREITA / ESQUERDA)
-   -------------------------------------------------------------------------- */
-
-@keyframes marquee-to-right {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes marquee-to-left {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-.skills-marquee[data-direction="right"] .skills-marquee-track {
-  animation: marquee-to-right var(--marquee-duration, 50s) linear infinite;
-  animation-delay: var(--marquee-delay, 0s);
-}
-
-.skills-marquee[data-direction="left"] .skills-marquee-track {
-  animation: marquee-to-left var(--marquee-duration, 50s) linear infinite;
-  animation-delay: var(--marquee-delay, 0s);
-}
-
-/* Pausa suave no hover ou quando um card está focado pelo teclado */
-.skills-marquee:hover .skills-marquee-track,
-.skills-marquee:focus-within .skills-marquee-track,
-.skills-marquee.is-paused .skills-marquee-track {
-  animation-play-state: paused;
-}
-
-.skills-marquee-group {
+CARROSSEL INFINITO - CENTRALIZADO E COM LARGURA REDUZIDA
+-------------------------------------------------------------------------- */
+.skills-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  flex-shrink: 0;
+  justify-content: center;
   align-items: center;
 }
 
+.skills-carousel-track {
+  display: flex;
+  gap: 2.5rem;
+  width: max-content;
+  animation: scroll-left 40s linear infinite;
+}
+
+/* Botões de navegação do carrossel */
+.skills-carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 2.5rem;
+  height: 2.5rem;
+  border: none;
+  background: rgba(0, 0, 0, 0.4);
+  color: var(--accent-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  cursor: pointer;
+  transition: background 0.2s;
+  opacity: 0;
+  visibility: hidden;
+  user-select: none;
+}
+
+.skills-carousel-nav svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.skills-carousel-nav:hover {
+  background: var(--accent-primary);
+  color: var(--bg-body);
+}
+
+.skills-carousel-nav:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+.skills-carousel:hover .skills-carousel-nav {
+  opacity: 1;
+  visibility: visible;
+}
+
+.skills-carousel-prev {
+  left: 1rem;
+}
+
+.skills-carousel-next {
+  right: 1rem;
+}
+
+/* Botões visíveis em dispositivos maiores */
+@media (min-width: 769px) {
+  .skills-carousel-nav {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 /* --------------------------------------------------------------------------
-   CARD INDIVIDUAL DA TECNOLOGIA (SKILL TILE)
-   -------------------------------------------------------------------------- */
+ITEM: APENAS ÍCONE + TEXTO VERDE
+-------------------------------------------------------------------------- */
+.skill-tile,
+.skill-tile *,
+.skill-tile::before,
+.skill-tile::after {
+  transition: none !important;
+  animation: none !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  filter: none !important;
+  transform: none !important;
+}
 
 .skill-tile {
-  position: relative;
-  flex: 0 0 auto;
-  width: clamp(20rem, 18vw, 15rem);
-  min-height: 10.5rem;
-  margin-right: 0,1rem;
-  padding: 1.15rem;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-sm);
-  background-color: var(--bg-card);
-  overflow: hidden;
-  isolation: isolate;
-  cursor: default;
-  transition: background-color var(--transition-fast),
-    border-color var(--transition-fast),
-    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  flex-shrink: 0;
+  white-space: nowrap;
+  width: auto !important;
+  min-width: auto !important;
+  max-width: none !important;
 }
 
-.skill-tile > :not(.skill-tile-watermark) {
-  position: relative;
-  z-index: 1;
+.skill-tile-content {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.skill-tile-watermark {
-  position: absolute;
-  z-index: 0;
-  right: -1rem;
-  bottom: -1rem;
-  width: clamp(6.5rem, 10vw, 8.5rem);
-  height: clamp(6.5rem, 10vw, 8.5rem);
-  color: var(--accent-primary);
-  opacity: 0.1;
-  pointer-events: none;
-  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+.skill-tile-icon-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  flex-shrink: 0;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.skill-tile-heading {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  min-height: 3rem;
+.skill-tile-icon-wrapper svg {
+  width: 100% !important;
+  height: 100% !important;
+  color: var(--accent-primary) !important; /* Ícone verde */
 }
 
-.skill-tile-icon {
-  flex: 0 0 auto;
-  width: 1.75rem;
-  height: 1.75rem;
-  color: var(--text-primary);
-  transition: color var(--transition-fast), transform var(--transition-fast);
+.skill-tile-image {
+  display: none !important;
 }
 
 .skill-tile-name {
-  position: relative;
-  min-width: 0;
-  color: var(--text-primary);
-  font-size: clamp(0.9rem, 1.15vw, 1.1rem);
-  font-weight: 800;
-  line-height: 1.2;
-  text-transform: uppercase;
-  overflow-wrap: anywhere;
-}
-
-/* Efeito Hover nos Cards */
-.skill-tile:hover {
-  border-color: var(--border-hover);
-  background-color: var(--bg-card-hover);
-  transform: translateY(-4px);
-  box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.35), 0 0 16px rgba(var(--accent-rgb), 0.2);
-}
-
-.skill-tile:hover .skill-tile-icon {
-  color: var(--accent-primary);
-  transform: scale(1.08);
-}
-
-.skill-tile:hover .skill-tile-watermark,
-.skill-tile:focus-within .skill-tile-watermark {
-  opacity: 0.22;
-  transform: translate(-0.85rem, -0.85rem) scale(1.08);
-}
-
-.skill-tile-watermark path,
-.skill-tile-watermark circle,
-.skill-tile-watermark rect,
-.skill-tile-watermark ellipse,
-.skill-tile-watermark polygon,
-.skill-tile-watermark line {
-  vector-effect: non-scaling-stroke;
-}
-
-.skill-tile-watermark path:not([fill="none"]),
-.skill-tile-watermark rect:not([fill="none"]),
-.skill-tile-watermark circle:not([fill="none"]) {
-  fill: currentColor;
+  margin: 0 !important;
+  padding: 0 !important;
+  color: var(--accent-primary) !important; /* Texto verde */
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  white-space: nowrap;
 }
 
 /* --------------------------------------------------------------------------
-   RESPONSIVO
-   -------------------------------------------------------------------------- */
-
-@media (max-width: 900px) {
-  .skill-tile {
-    width: clamp(10.5rem, 24vw, 13rem);
-    min-height: 9.75rem;
+RESPONSIVO
+-------------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .skill-group {
+    max-width: 100%;
   }
+  
+  .skills-carousel-track {
+    gap: 2rem;
+    animation-duration: 3s;
+  }
+  
+  .skill-tile { gap: 0.5rem !important; }
+  .skill-tile-icon-wrapper { width: 1.1rem !important; height: 1.1rem !important; }
+  .skill-tile-name { font-size: 0.85rem !important; }
 }
-
-@media (max-width: 600px) {
-  .skill-groups {
-    gap: 1.75rem;
-  }
-
-  .skills-marquee {
-    padding: 0.4rem 0 0.8rem;
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    );
-  }
-
-  .skill-tile {
-    width: clamp(9.5rem, 38vw, 11.5rem);
-    min-height: 9rem;
-    padding: 0.9rem;
-    margin-right: 0.75rem;
-  }
-
-  .skill-tile-watermark {
-    width: 5.75rem;
-    height: 5.75rem;
-  }
-
-  .skill-tile-heading {
-    gap: 0.55rem;
-  }
-
-  .skill-tile-icon {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .skill-tile-name {
-    font-size: 0.85rem;
-  }
-}
-
-/* --------------------------------------------------------------------------
-   ACESSIBILIDADE: PREFERS-REDUCED-MOTION
-   -------------------------------------------------------------------------- */
 
 @media (prefers-reduced-motion: reduce) {
-  .skills-marquee {
-    overflow-x: auto;
-    -webkit-mask-image: none;
-    mask-image: none;
-  }
-
-  .skills-marquee-track {
+  .skills-carousel-track {
     animation: none !important;
-    transform: none !important;
-  }
-
-  .skill-tile-watermark {
-    transition: none;
-  }
-
-  .skill-tile:hover .skill-tile-watermark,
-  .skill-tile:focus-within .skill-tile-watermark {
-    transform: none;
-  }
-
-  .skill-tile {
-    transform: none !important;
-    transition: none;
   }
 }

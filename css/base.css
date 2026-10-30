@@ -133,7 +133,7 @@ body > footer {
 #section-glow.is-pulsing {
   animation: glow-pulse 0.9s ease forwards;
 }
-}
+
 
 @media (max-width: 768px) {
   .section {

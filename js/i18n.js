@@ -68,6 +68,11 @@ const I18nModule = {
       'contact.desc': 'Estou sempre aberto a novas oportunidades profissionais, projetos freelance e colaborações técnicas. Fique à vontade para me enviar uma mensagem!',
       'contact.copy': 'Copiar',
       'contact.send': 'Enviar E-mail',
+
+
+      'github.tag': 'Competências',
+      'github.title': 'Stack & Ferramentas',
+      'github.desc': 'Resumo das movimentações de projetos no GitHub.',      
       'github.total': 'Total',
       'github.title': 'Últimas atividades do GitHub',
       'github.year': 'Últimos 12 meses',
@@ -144,8 +149,13 @@ const I18nModule = {
       'contact.desc': "I'm always open to new professional opportunities, freelance projects, and technical collaborations. Feel free to reach out!",
       'contact.copy': 'Copy',
       'contact.send': 'Send Email',
-      'github.total': 'Total',
+
+
+
+      'github.tag': 'Updates',
       'github.title': 'Latest public GitHub activity',
+      'github.desc': 'Summary of project activity on GitHub.',
+      'github.total': 'Total',
       'github.year': 'Last 12 months',
       'github.month': 'This month',
       'github.today': 'Today',

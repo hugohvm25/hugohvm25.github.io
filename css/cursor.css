@@ -9,60 +9,63 @@
     top: 0;
     left: 0;
     z-index: 99999;
-    width: 18px;
-    height: 18px;
-    border: 1px solid var(--accent-primary);
-    border-radius: 50%;
-    background: transparent;
-    mix-blend-mode: difference;
+    width: 32px;
+    height: 32px;
     opacity: 0;
     pointer-events: none;
-    transform: translate3d(-50%, -50%, 0);
-    transition: width 180ms ease, height 180ms ease, opacity 120ms ease,
-      background-color 180ms ease, border-color 180ms ease;
+    transform-origin: 0 0;
+    transition: opacity 120ms ease, width 180ms ease, height 180ms ease;
     will-change: left, top;
+    filter: drop-shadow(0 0 4px var(--accent-primary));
   }
 
-  #cursor::before,
-  #cursor::after {
-    content: '';
-    position: absolute;
-    inset: -7px;
-    border: 1px solid var(--accent-primary);
-    border-radius: 50%;
-    transition: inset 180ms ease, border-width 180ms ease, opacity 180ms ease;
+  #cursor svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
   }
 
-  #cursor::after {
-    inset: 4px;
-    border-color: transparent var(--accent-primary);
-    opacity: 0;
+  #cursor .cursor-fill-dark {
+    fill: var(--cursor-dark);
+    transition: fill 180ms ease;
+  }
+
+  #cursor .cursor-fill-light {
+    fill: var(--accent-secondary);
+    transition: fill 180ms ease;
+  }
+
+  #cursor .cursor-stroke {
+    stroke: var(--accent-primary);
+    transition: stroke 180ms ease;
   }
 
   html.custom-cursor-enabled #cursor.is-visible {
     opacity: 1;
   }
 
-  #cursor.is-hovering {
-    width: 12px;
-    height: 12px;
-    background: var(--accent-primary);
-  }
-
-  #cursor.is-hovering::before {
-    inset: -9px;
-    border-width: 2px;
-    animation: custom-cursor-spin 1.1s linear infinite;
-  }
-
-  #cursor.is-hovering::after {
-    opacity: 1;
-    animation: custom-cursor-spin 1.1s linear infinite reverse;
-  }
-
+  /* Manter formato e cor original sobre botões e interativos */
+  #cursor.is-hovering,
   #cursor.is-active {
-    background: var(--accent-secondary);
-    border-color: var(--accent-secondary);
+    width: 22px;
+    height: 22px;
+    filter: drop-shadow(0 0 4px var(--accent-primary));
+  }
+
+  #cursor.is-hovering .cursor-fill-dark,
+  #cursor.is-active .cursor-fill-dark {
+    fill: var(--cursor-dark);
+  }
+
+  #cursor.is-hovering .cursor-fill-light,
+  #cursor.is-active .cursor-fill-light {
+    fill: var(--accent-secondary);
+  }
+
+  #cursor.is-hovering .cursor-stroke,
+  #cursor.is-active .cursor-stroke {
+    stroke: var(--accent-primary);
   }
 }
 

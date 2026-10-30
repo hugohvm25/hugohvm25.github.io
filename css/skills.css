@@ -181,8 +181,8 @@ ITEM: APENAS ÍCONE + TEXTO VERDE
 .skill-tile-name {
   margin: 0 !important;
   padding: 0 !important;
-  color: var(--accent-primary) !important; /* Texto verde */
-  font-size: 0.9rem !important;
+  color: var(--accent-skill) !important; /* Texto verde */
+  font-size: 1.2rem !important;
   font-weight: 500 !important;
   line-height: 1 !important;
   white-space: nowrap;

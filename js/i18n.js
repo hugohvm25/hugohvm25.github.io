@@ -85,7 +85,8 @@ const I18nModule = {
       'github.updateError': 'Não foi possível atualizar todos os dados do GitHub.',
 
       // Rodapé
-      'footer.rights': '© 2026 Hugo Verissimo de Mello. Todos os direitos reservados.'
+      'footer.rights': '© 2026 Hugo Verissimo de Mello. Todos os direitos reservados.',
+      'footer.visits': 'Contador global de visitas'
     },
 
     en: {
@@ -166,7 +167,8 @@ const I18nModule = {
       'github.updateError': 'Could not refresh all GitHub data.',
 
       // Footer
-      'footer.rights': '© 2026 Hugo Verissimo de Mello. All rights reserved.'
+      'footer.rights': '© 2026 Hugo Verissimo de Mello. All rights reserved.',
+      'footer.visits': 'Global page visit counter'
     }
   },
 

@@ -18,6 +18,7 @@ Desenvolvido para ser leve, direto ao ponto, responsivo e sem sobrecarga visual 
   - Badge pulsante de status ("Disponível para novos projetos").
   - Botão interativo de copiar e-mail com 1 clique e feedback instantâneo.
   - Painel de atividade pública do GitHub atualizado automaticamente a cada 5 minutos.
+  - Contador global de visitas no rodapé, fornecido pelo [Visitor Badge](https://visitorbadge.io).
   - Menu responsivo para smartphones e tablets.
   - Destaque do link de navegação conforme a rolagem da página.
 - **Estrutura sem sobrecarga**:

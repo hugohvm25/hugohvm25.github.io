@@ -279,16 +279,16 @@
   .nav-links {
     top: auto;
     bottom: 1rem;
-    left: 50%;
+    left: calc(50% - 1.25rem);
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    gap: clamp(0.45rem, 2vw, 0.9rem);
-    max-width: calc(100vw - 1rem);
+    justify-content: space-between;
+    gap: 0;
+    width: min(30rem, calc(100vw - 5.25rem));
     padding: 0.6rem 0.75rem;
-    border: 1px solid rgba(var(--accent-rgb), 0.55);
+    border: 1px solid var(--border-subtle);
     border-radius: var(--radius-full);
-    background: rgba(var(--accent-rgb), 0.28);
+    background: rgba(10, 14, 11, 0.48);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.28);
@@ -296,21 +296,50 @@
   }
 
   .nav-link {
+    position: relative;
+    padding: 0.3rem 0.25rem;
+    border-radius: var(--radius-full);
     font-size: clamp(0.65rem, 2.2vw, 0.78rem);
+    transition:
+      color var(--transition-fast);
+  }
+
+  .nav-link::after {
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0.12rem;
+    left: 0.25rem;
+    height: 1px;
+    background: var(--accent-primary);
+    content: '';
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition-fast);
   }
 
   .nav-link::before {
     display: none;
   }
 
-  .nav-link:hover,
-  .nav-link.active {
+  .nav-links .nav-link:hover > span,
+  .nav-links .nav-link:active > span,
+  .nav-links .nav-link:focus-visible > span,
+  .nav-links .nav-link.active > span {
+    color: var(--accent-primary);
+  }
+
+  .nav-links .nav-link:hover,
+  .nav-links .nav-link:active,
+  .nav-links .nav-link:focus-visible,
+  .nav-links .nav-link.active {
     transform: none;
   }
 
-  .nav-link.active {
-    color: var(--text-primary);
-    text-shadow: 0 0 12px rgba(var(--accent-rgb), 0.55);
+  .nav-links .nav-link:hover::after,
+  .nav-links .nav-link:active::after,
+  .nav-links .nav-link:focus-visible::after,
+  .nav-links .nav-link.active::after {
+    transform: scaleX(1);
   }
 }
 
@@ -375,14 +404,7 @@
   }
 
   .nav-links {
-    gap: 0.5rem;
     padding: 0.55rem 0.65rem;
-  }
-}
-
-@media (max-width: 350px) {
-  .nav-links {
-    left: calc(50% - 1.25rem);
   }
 }
 

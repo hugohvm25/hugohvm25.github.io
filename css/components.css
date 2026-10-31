@@ -57,7 +57,7 @@
 .status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.8rem;
   padding: 0.52rem 1.2rem;
   border-radius: var(--radius-full);
   background: var(--success-bg);

@@ -93,8 +93,9 @@
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text-secondary);
-  letter-spacing: 0.05em;
-  margin-top: 0.5rem;
+  letter-spacing: 0.8em;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   line-height: 1;
 }
 

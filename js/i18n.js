@@ -193,6 +193,10 @@ const I18nModule = {
     document.documentElement.setAttribute('lang', lang === 'pt' ? 'pt-BR' : 'en');
 
     // Atualiza botões no seletor
+    document.querySelectorAll('.lang-switch').forEach(switcher => {
+      switcher.dataset.lang = lang;
+    });
+
     document.querySelectorAll('.lang-btn').forEach(btn => {
       const btnLang = btn.getAttribute('data-lang');
       if (btnLang === lang) {

@@ -133,6 +133,13 @@ body > footer {
   }
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .scroll-blur-target {
+    will-change: auto;
+    transition: none;
+  }
+}
+
 /* Glow de seção — fundo colorido conforme a seção ativa */
 #section-glow {
   position: fixed;

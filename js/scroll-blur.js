@@ -65,7 +65,8 @@ const ScrollBlurModule = (() => {
   }
 
   function init() {
-    if (prefersReducedMotion) return;
+    const lowPowerViewport = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
+    if (prefersReducedMotion || lowPowerViewport) return;
 
     const candidates = Array.from(document.querySelectorAll(CONTENT_SELECTOR));
     const candidateSet = new Set(candidates);

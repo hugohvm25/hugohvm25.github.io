@@ -50,6 +50,13 @@
   transform: translate3d(-50%, calc(-50% + var(--hero-identity-offset, 0px)), 0);
 }
 
+@media (max-width: 768px), (pointer: coarse) {
+  .hero-identity {
+    filter: none;
+    will-change: opacity, transform;
+  }
+}
+
 .hero-intro {
   opacity: var(--hero-intro-opacity, 0);
   pointer-events: none;
@@ -99,7 +106,7 @@
 
 .hero-name-first {
   display: block;
-  font-size: 12rem;
+  font-size: 16rem;
   font-weight: 900;
   line-height: 0.92;
   letter-spacing: -0.03em;
@@ -198,7 +205,7 @@
   font-family: var(--font-mono);
 }
 
-/* Linha de Roleta de Código (Estilo Ruben Marcus / Hacker Scramble) */
+/* Linha de Roleta de Código */
 .hero-scramble-box {
   display: inline-flex;
   align-items: center;

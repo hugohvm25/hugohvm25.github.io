@@ -34,16 +34,20 @@ CARROSSEL INFINITO - CENTRALIZADO E COM LARGURA REDUZIDA
 .skills-carousel {
   position: relative;
   width: 100%;
+  margin-top: 1.5rem;
   overflow: hidden;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .skills-carousel-track {
+  --skills-carousel-gap: 2.5rem;
   display: flex;
-  gap: 2.5rem;
+  flex: 0 0 max-content;
+  gap: var(--skills-carousel-gap);
   width: max-content;
+  padding-right: var(--skills-carousel-gap);
   animation: scroll-left 40s linear infinite;
 }
 
@@ -197,8 +201,8 @@ RESPONSIVO
   }
   
   .skills-carousel-track {
-    gap: 2rem;
-    animation-duration: 3s;
+    --skills-carousel-gap: 2rem;
+    animation-duration: 24s;
   }
   
   .skill-tile { gap: 0.5rem !important; }

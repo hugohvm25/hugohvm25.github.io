@@ -143,16 +143,16 @@
                         <span class="scramble-text" id="code-roulette">aplicações web full stack</span>
                     </div>
 
-                    <h2 class="hero-title scroll-blur-title" data-i18n="hero.title">
+                    <h2 class="hero-title" data-i18n="hero.title">
                         Desenvolvedor <span class="highlight">Full Stack</span> criando produtos de alto impacto.
                     </h2>
 
-                    <p class="hero-subtitle scroll-blur-title" data-i18n="hero.subtitle">
+                    <p class="hero-subtitle" data-i18n="hero.subtitle">
                         Olá, sou <strong>Hugo Verissimo de Mello</strong>. Construo aplicações web completas, escaláveis
                         e eficientes, unindo código limpo no backend com interfaces fluidas e intuitivas no frontend.
                     </p>
 
-                    <div class="hero-cta scroll-blur-title">
+                    <div class="hero-cta">
                         <a href="#projetos" class="btn btn-projects">
                             <span data-i18n="hero.btnProjects">Explorar Projetos</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
@@ -168,14 +168,17 @@
             </div>
         </section>
 
+
+
+
         <!-- ====================================================================
          SEÇÃO SOBRE MIM (Direta e Objetiva)
          ==================================================================== -->
         <section class="section" id="sobre">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag scroll-blur-title" data-i18n="about.tag">Apresentação</span>
-                    <h2 class="section-title scroll-blur-title" data-i18n="about.title">Sobre Mim</h2>
+                    <span class="section-tag" data-i18n="about.tag">Apresentação</span>
+                    <h2 class="section-title" data-i18n="about.title">Sobre Mim</h2>
                 </div>
 
                 <div class="about-grid">
@@ -251,15 +254,17 @@
             </div>
         </section>
 
+
+
         <!-- ====================================================================
          SEÇÃO PROJETOS EM DESTAQUE
          ==================================================================== -->
         <section class="section" id="projetos">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag scroll-blur-title" data-i18n="projects.tag">Portfólio</span>
-                    <h2 class="section-title scroll-blur-title" data-i18n="projects.title">Projetos em Destaque</h2>
-                    <p class="section-description scroll-blur-title" data-i18n="projects.desc">
+                    <span class="section-tag" data-i18n="projects.tag">Portfólio</span>
+                    <h2 class="section-title" data-i18n="projects.title">Projetos em Destaque</h2>
+                    <p class="section-description" data-i18n="projects.desc">
                         Algumas soluções e projetos que desenvolvi com foco em usabilidade, arquitetura limpa e
                         tecnologias modernas.
                     </p>
@@ -411,84 +416,97 @@
          SEÇÃO TECNOLOGIAS & FERRAMENTAS (STACK)
          ==================================================================== -->
 
-        <section class="skill-group" aria-labelledby="skill-frontend-title">
-            <h3 class="skill-group-title" id="skill-frontend-title" data-i18n="stack.catFrontend">Frontend</h3>
-            <div class="skills-carousel" aria-label="Frontend">
+        <section class="section" id="stack">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag" data-i18n="stack.tag">Competências</span>
+                    <h2 class="section-title" data-i18n="stack.title">Stack & Ferramentas</h2>
+                    <p class="section-description" data-i18n="stack.desc">
+                        Tecnologias que utilizo no dia a dia para construir soluções eficientes do frontend ao deploy.
+                    </p>
+                </div>
 
-                <div class="skills-carousel-track">
-                    <!-- TypeScript -->
-                    <article class="skill-tile">
-                        <div class="skill-tile-content">
-                            <div class="skill-tile-icon-wrapper">
-                                <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill="currentColor" d="M2 2h20v20H2z" />
-                                    <path fill="currentColor"
-                                        d="M12 11h4v2h-1v6h-2v-6h-1zM8 11h3v2H9v1h2v2H9v1h2v2H8z" />
-                                </svg>
+                <div class="skills-carousel" role="region" aria-label="Carrossel de tecnologias">
+                    <div class="skills-carousel-track">
+                        <!-- TypeScript -->
+                        <article class="skill-tile">
+                            <div class="skill-tile-content">
+                                <div class="skill-tile-icon-wrapper">
+                                    <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill="currentColor" d="M2 2h20v20H2z" />
+                                        <path fill="currentColor"
+                                            d="M12 11h4v2h-1v6h-2v-6h-1zM8 11h3v2H9v1h2v2H9v1h2v2H8z" />
+                                    </svg>
+                                </div>
+                                <h4 class="skill-tile-name">TypeScript</h4>
                             </div>
-                            <h4 class="skill-tile-name">TypeScript</h4>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- JavaScript -->
-                    <article class="skill-tile">
-                        <div class="skill-tile-content">
-                            <div class="skill-tile-icon-wrapper">
-                                <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill="currentColor" d="M2 2h20v20H2z" />
-                                    <text x="12" y="17" fill="var(--bg-body)" text-anchor="middle" font-size="9"
-                                        font-family="sans-serif" font-weight="700">JS</text>
-                                </svg>
+                        <!-- JavaScript -->
+                        <article class="skill-tile">
+                            <div class="skill-tile-content">
+                                <div class="skill-tile-icon-wrapper">
+                                    <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill="currentColor" d="M2 2h20v20H2z" />
+                                        <text x="12" y="17" fill="var(--bg-body)" text-anchor="middle" font-size="9"
+                                            font-family="sans-serif" font-weight="700">JS</text>
+                                    </svg>
+                                </div>
+                                <h4 class="skill-tile-name">JavaScript (ES6+)</h4>
                             </div>
-                            <h4 class="skill-tile-name">JavaScript (ES6+)</h4>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- Next.js -->
-                    <article class="skill-tile">
-                        <div class="skill-tile-content">
-                            <div class="skill-tile-icon-wrapper">
-                                <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path fill="currentColor" d="M12 2L1 21h5l6-10 6.5 11H23L12 2z" />
-                                    <path fill="var(--bg-body)" d="M12.1 12.2L18 21h2.8L14 10z" />
-                                </svg>
+                        <!-- Next.js -->
+                        <article class="skill-tile">
+                            <div class="skill-tile-content">
+                                <div class="skill-tile-icon-wrapper">
+                                    <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path fill="currentColor" d="M12 2L1 21h5l6-10 6.5 11H23L12 2z" />
+                                        <path fill="var(--bg-body)" d="M12.1 12.2L18 21h2.8L14 10z" />
+                                    </svg>
+                                </div>
+                                <h4 class="skill-tile-name">Next.js</h4>
                             </div>
-                            <h4 class="skill-tile-name">Next.js</h4>
-                        </div>
-                    </article>
+                        </article>
 
-                    <!-- HTML5/CSS3 -->
-                    <article class="skill-tile">
-                        <div class="skill-tile-content">
-                            <div class="skill-tile-icon-wrapper">
-                                <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
-                                    <path d="m8 5-5 7 5 7M16 5l5 7-5 7M14 3l-4 18" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                        <!-- HTML5/CSS3 -->
+                        <article class="skill-tile">
+                            <div class="skill-tile-content">
+                                <div class="skill-tile-icon-wrapper">
+                                    <svg class="skill-tile-icon" viewBox="0 0 24 24" aria-hidden="true">
+                                        <path d="m8 5-5 7 5 7M16 5l5 7-5 7M14 3l-4 18" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </div>
+                                <h4 class="skill-tile-name">HTML5 / CSS3</h4>
                             </div>
-                            <h4 class="skill-tile-name">HTML5 / CSS3</h4>
-                        </div>
-                    </article>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>
 
 
 
+        <!-- ====================================================================
+         SEÇÃO DE ATUALIZAÇÕES DO GITHUB
+         ==================================================================== -->
+
+
         <section class="section" id="stack">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-tag scroll-blur-title" data-i18n="github.tag">Atualizações</span>
-                    <h2 class="section-title scroll-blur-title" data-i18n="github.title">Últimas atividades do GitHub
+                    <span class="section-tag" data-i18n="github.tag">Atualizações</span>
+                    <h2 class="section-title" data-i18n="github.title">Últimas atividades do GitHub
                     </h2>
 
-                    <p class="section-description scroll-blur-title" data-i18n="github.desc">
+                    <p class="section-description" data-i18n="github.desc">
                         Resumo das movimentações de projetos no GitHub.
                     </p>
                 </div>
 
                 <section class="github-activity" aria-labelledby="github-activity-title">
-                    <header class="github-activity-header scroll-blur-title">
+                    <header class="github-activity-header">
                         <h3 class="github-activity-title" id="github-activity-title">
                             <svg viewBox="0 0 24 24" aria-hidden="true">
                                 <path
@@ -500,24 +518,24 @@
                         <span class="github-activity-indicator" aria-hidden="true"></span>
                     </header>
                     <div class="github-activity-grid ">
-                        <div class="github-activity-stat scroll-blur-title">
+                        <div class="github-activity-stat">
                             <span class="github-activity-label" data-i18n="github.total">Total</span>
                             <strong class="github-activity-value" id="github-total-count">—</strong>
                         </div>
-                        <div class="github-activity-stat scroll-blur-title">
+                        <div class="github-activity-stat">
                             <span class="github-activity-label" data-i18n="github.year">Últimos 12 meses</span>
                             <strong class="github-activity-value" id="github-year-count">—</strong>
                         </div>
-                        <div class="github-activity-stat scroll-blur-title">
+                        <div class="github-activity-stat">
                             <span class="github-activity-label" data-i18n="github.month">Este mês</span>
                             <strong class="github-activity-value" id="github-month-count">—</strong>
                         </div>
-                        <div class="github-activity-stat scroll-blur-title">
+                        <div class="github-activity-stat">
                             <span class="github-activity-label" data-i18n="github.today">Hoje</span>
                             <strong class="github-activity-value" id="github-today-count">—</strong>
                         </div>
 
-                        <div class="github-activity-commit scroll-blur-title">
+                        <div class="github-activity-commit">
                             <span class="github-activity-label" data-i18n="github.latest">Último commit público</span>
                             <a class="github-activity-commit-title" id="github-latest-commit"
                                 href="https://github.com/hugohvm25" target="_blank" rel="noopener noreferrer"
@@ -549,12 +567,13 @@
     </footer>
 
     <div id="cursor" aria-hidden="true">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path class="cursor-fill-dark" d="M3.5 1.5L24 13.5L12.5 14Z" />
-        <path class="cursor-fill-light" d="M3.5 1.5L12.5 14L8 22.5Z" />
-        <path class="cursor-stroke" d="M3.5 1.5L24 13.5L12.5 14L8 22.5L3.5 1.5Z" fill="none" stroke-linejoin="round" stroke-width="2" />
-    </svg>
-</div>
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path class="cursor-fill-dark" d="M3.5 1.5L24 13.5L12.5 14Z" />
+            <path class="cursor-fill-light" d="M3.5 1.5L12.5 14L8 22.5Z" />
+            <path class="cursor-stroke" d="M3.5 1.5L24 13.5L12.5 14L8 22.5L3.5 1.5Z" fill="none" stroke-linejoin="round"
+                stroke-width="2" />
+        </svg>
+    </div>
 
     <!-- Scripts Modulares -->
     <script src="js/theme.js"></script>

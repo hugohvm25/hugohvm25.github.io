@@ -70,7 +70,7 @@ const I18nModule = {
       'contact.send': 'Enviar E-mail',
 
 
-      'github.tag': 'Competências',
+      'github.tag': 'Atualizações',
       'github.title': 'Stack & Ferramentas',
       'github.desc': 'Resumo das movimentações de projetos no GitHub.',      
       'github.total': 'Total',

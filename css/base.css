@@ -92,14 +92,14 @@ body > footer {
   margin-right: auto;
 }
 
-/* Scroll blur — títulos ganham foco ao centro do viewport */
-.scroll-blur-title {
+/* O blur acompanha os blocos de conteúdo ao entrarem na faixa inferior. */
+.scroll-blur-target {
   will-change: filter, opacity;
   transition: filter 0.15s ease-out, opacity 0.15s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .scroll-blur-title {
+  .scroll-blur-target {
     transition: none;
   }
 }
@@ -110,7 +110,7 @@ body > footer {
   top: -10%;
   left: 0;
   right: 0;
-  height: 65vh;
+  height: 85vh;
   pointer-events: none;
   z-index: 0;
   opacity: 0;

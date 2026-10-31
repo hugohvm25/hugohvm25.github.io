@@ -33,11 +33,11 @@ const SkillsCarouselModule = {
       return;
     }
 
-    // Calcula quantas repetições são necessárias para preencher a tela + ultrapassar
-    const trackWidth = track.offsetWidth;
-    const tileWidth = originalTiles[0].offsetWidth + 32; // largura do tile + gap
-    const minTilesNeeded = Math.ceil((trackWidth * 2) / tileWidth);
-    const repeatFactor = Math.ceil(minTilesNeeded / originalTiles.length);
+    const cycleWidth = track.offsetWidth;
+    if (!cycleWidth) return;
+
+    const cyclesPerHalf = Math.max(1, Math.ceil(carousel.clientWidth / cycleWidth));
+    const repeatFactor = cyclesPerHalf * 2 - 1;
 
     // Clona os itens múltiplas vezes
     const fragment = document.createDocumentFragment();
@@ -53,6 +53,7 @@ const SkillsCarouselModule = {
     carousel.classList.add('is-initialized');
 
     // Inicializa os botões de navegação
+    const tileWidth = originalTiles[0].offsetWidth + parseFloat(getComputedStyle(track).columnGap);
     this.setupNavButtons(carousel, track, originalTiles, tileWidth);
   },
 

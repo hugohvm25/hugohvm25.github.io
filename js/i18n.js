@@ -9,9 +9,11 @@ const I18nModule = {
   dictionary: {
     pt: {
       // Navegação
+      'nav.home': 'Início',
       'nav.about': 'Sobre',
       'nav.projects': 'Projetos',
       'nav.stack': 'Stack',
+      'nav.github': 'GitHub',
       'nav.contact': 'Contato',
       'nav.cta': 'Fale Comigo',
 
@@ -91,9 +93,11 @@ const I18nModule = {
 
     en: {
       // Navigation
+      'nav.home': 'Home',
       'nav.about': 'About',
       'nav.projects': 'Projects',
       'nav.stack': 'Stack',
+      'nav.github': 'GitHub',
       'nav.contact': 'Contact',
       'nav.cta': "Let's Connect",
 

@@ -13,6 +13,7 @@ const SectionGlowModule = (() => {
     sobre:    '38, 200, 80',     // verde vívido
     projetos: '100, 80, 255',    // índigo/azul elétrico
     stack:    '0, 190, 220',     // ciano vívido
+    github:   '88, 166, 255',    // azul GitHub
   };
 
   // Intensidade base do radial-gradient

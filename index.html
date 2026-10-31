@@ -32,15 +32,19 @@
     <!-- Cabeçalho & Navegação Fixa -->
     <header class="header">
         <div class="nav">
-            <a href="#" class="nav-brand" aria-label="Início">
+            <a href="#inicio" class="nav-brand" aria-label="Início">
                 <div class="brand-avatar">
-                    <img src="assets/images/lambda_puro.png" alt="Hugo Verissimo" class="brand-logo">
+                    <img src="assets/images/lambda_puro.png" alt="" class="brand-logo">
                 </div>
-                <span class="brand-name">Hugo Verissimo</span>
+                <span class="brand-name">H v M</span>
             </a>
 
+            
+
             <!-- Menu de Links com contorno redondo (Pill) e animação contínua -->
-            <ul class="nav-links" id="nav-links" role="navigation">
+            <nav aria-label="Navegação principal">
+                <ul class="nav-links" id="nav-links">
+                <li><a href="#inicio" class="nav-link" data-i18n="nav.home">Início</a></li>
                 <li><a href="#sobre" class="nav-link"><span data-i18n="nav.about">Sobre</span><svg
                             class="nav-link-outline" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
                             <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100">
@@ -56,8 +60,10 @@
                             <rect x="0.75" y="0.75" width="98.5" height="38.5" rx="19.25" ry="19.25" pathLength="100">
                             </rect>
                         </svg></a></li>
+                <li><a href="#github" class="nav-link" data-i18n="nav.github">GitHub</a></li>
 
-            </ul>
+                </ul>
+            </nav>
 
             <!-- Ações do Menu -->
             <div class="nav-actions">
@@ -98,20 +104,10 @@
                     <span class="lang-divider">/</span>
                     <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
                 </div>
-
-
-
-                <!-- Botão Menu Mobile -->
-                <button id="mobile-toggle" class="mobile-toggle" aria-label="Abrir menu" aria-expanded="false">
-                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="3" y1="12" x2="21" y2="12"></line>
-                        <line x1="3" y1="6" x2="21" y2="6"></line>
-                        <line x1="3" y1="18" x2="21" y2="18"></line>
-                    </svg>
-                </button>
             </div>
         </div>
+
+        
     </header>
 
     <main>
@@ -121,46 +117,49 @@
         <section class="section hero" id="inicio">
             <div class="container hero-grid">
                 <div class="hero-content">
-                    <!-- Status Disponível -->
-                    <div class="status-pill">
-                        <span class="status-dot"></span>
-                        <span data-i18n="hero.status">Disponível para novos projetos</span>
-                    </div>
+                    <div class="hero-identity">
 
-                    <br>
-                    <!-- Bloco de Nome com Larguras Sincronizadas -->
-                    <div class="hero-name-wrapper">
-                        <h1 class="hero-name-first highlight"><strong>HUGO</strong></h1>
-                        <div class="hero-name-last" aria-label="Verissimo de Mello">
-                            <span>VERISSIMO</span>
-                            <span>DE</span>
-                            <span>MELLO</span>
+                        <div class="status-pill">
+                            <span class="status-dot"></span>
+                            <span data-i18n="hero.status">Disponível para novos projetos</span>
                         </div>
+                        
+                        <div class="hero-name-wrapper">
+                            <h1 class="hero-name-first highlight"><strong>HUGO</strong></h1>
+                            <div class="hero-name-last" aria-label="Verissimo de Mello">
+                                <span>VERISSIMO</span>
+                                <span>DE</span>
+                                <span>MELLO</span>
+                            </div>
+                        </div>
+
+                        <div class="hero-scramble-box" aria-label="Especialidades">
+                            <span class="scramble-prompt" aria-hidden="true">&gt;</span>
+                            <span class="scramble-text" id="code-roulette">aplicações web full stack</span>
+                        </div>
+                        
                     </div>
-                    <!-- Roleta de Código (Estilo Ruben Marcus) -->
-                    <div class="hero-scramble-box" aria-label="Especialidades">
-                        <span class="scramble-prompt" aria-hidden="true">&gt;</span>
-                        <span class="scramble-text" id="code-roulette">aplicações web full stack</span>
-                    </div>
 
-                    <h2 class="hero-title" data-i18n="hero.title">
-                        Desenvolvedor <span class="highlight">Full Stack</span> criando produtos de alto impacto.
-                    </h2>
+                    <div class="hero-intro">
+                        <h2 class="hero-title" data-i18n="hero.title">
+                            Desenvolvedor <span class="highlight">Full Stack</span> criando produtos de alto impacto.
+                        </h2>
 
-                    <p class="hero-subtitle" data-i18n="hero.subtitle">
-                        Olá, sou <strong>Hugo Verissimo de Mello</strong>. Construo aplicações web completas, escaláveis
-                        e eficientes, unindo código limpo no backend com interfaces fluidas e intuitivas no frontend.
-                    </p>
+                        <p class="hero-subtitle" data-i18n="hero.subtitle">
+                            Olá, sou <strong>Hugo Verissimo de Mello</strong>. Construo aplicações web completas, escaláveis
+                            e eficientes, unindo código limpo no backend com interfaces fluidas e intuitivas no frontend.
+                        </p>
 
-                    <div class="hero-cta">
-                        <a href="#projetos" class="btn btn-projects">
-                            <span data-i18n="hero.btnProjects">Explorar Projetos</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <line x1="7" y1="17" x2="17" y2="7"></line>
-                                <polyline points="7 7 17 7 17 17"></polyline>
-                            </svg>
-                        </a>
+                        <div class="hero-cta">
+                            <a href="#projetos" class="btn btn-projects">
+                                <span data-i18n="hero.btnProjects">Explorar Projetos</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                                    <polyline points="7 7 17 7 17 17"></polyline>
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                 </div>
 
@@ -493,7 +492,7 @@
          ==================================================================== -->
 
 
-        <section class="section" id="stack">
+        <section class="section" id="github">
             <div class="container">
                 <div class="section-header">
                     <span class="section-tag" data-i18n="github.tag">Atualizações</span>

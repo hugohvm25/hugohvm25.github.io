@@ -95,6 +95,7 @@ class TextScramble {
 // Orquestrador do efeito de roleta na página
 const ScrambleModule = {
   instance: null,
+  lastNameFrameId: null,
 
   phrasesPT: [
     'aplicações web full stack',
@@ -137,26 +138,57 @@ const ScrambleModule = {
     const lastNameContainer = document.querySelector('.hero-name-last');
     if (!lastNameContainer) return;
 
-    const spans = lastNameContainer.querySelectorAll('span');
-    spans.forEach((span, idx) => {
-      const originalText = span.innerText;
-      const chars = '!<>-_\\/[]{}—=+*^?#01';
-      let frame = 0;
-      const maxFrames = 15 + idx * 6;
+    if (this.lastNameFrameId !== null) {
+      cancelAnimationFrame(this.lastNameFrameId);
+      this.lastNameFrameId = null;
+    }
 
-      const interval = setInterval(() => {
-        frame++;
-        if (frame >= maxFrames) {
-          clearInterval(interval);
-          span.innerText = originalText;
-        } else {
-          span.innerText = originalText
-            .split('')
-            .map(() => chars[Math.floor(Math.random() * chars.length)])
-            .join('');
-        }
-      }, 45);
+    const spans = Array.from(lastNameContainer.querySelectorAll('span'));
+    const characters = '!<>-_\\/[]{}—=+*^?#01';
+    const duration = 675;
+    const stagger = 270;
+    const updateInterval = 45;
+    const animations = spans.map((span, index) => {
+      const originalText = span.dataset.originalText || span.innerText;
+      span.dataset.originalText = originalText;
+      return { span, originalText, delay: index * stagger, lastUpdate: -updateInterval };
     });
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      animations.forEach(({ span, originalText }) => {
+        span.innerText = originalText;
+      });
+      return;
+    }
+
+    const startTime = performance.now();
+    const animate = now => {
+      let allComplete = true;
+      animations.forEach(animation => {
+        const elapsed = now - startTime - animation.delay;
+        if (elapsed >= duration) {
+          animation.span.innerText = animation.originalText;
+          return;
+        }
+        allComplete = false;
+        if (elapsed >= 0 && elapsed - animation.lastUpdate >= updateInterval) {
+          animation.span.innerText = animation.originalText
+            .split('')
+            .map(() => characters[Math.floor(Math.random() * characters.length)])
+            .join('');
+          animation.lastUpdate = elapsed;
+        }
+      });
+
+      if (allComplete) {
+        this.lastNameFrameId = null;
+        return;
+      }
+
+      this.lastNameFrameId = requestAnimationFrame(animate);
+    };
+
+    this.lastNameFrameId = requestAnimationFrame(animate);
   },
 
   updateLanguage(lang) {
@@ -165,4 +197,3 @@ const ScrambleModule = {
     this.instance.setPhrases(phrases);
   }
 };
-

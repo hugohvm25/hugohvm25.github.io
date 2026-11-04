@@ -29,6 +29,29 @@
   --accent-light: rgba(33, 93, 31, 0.12);
   --cursor-dark: #1A4A17;
 
+  /* ==========================================================================
+     CORES DO GLOW DO BACKGROUND (Lidas pelo js/section-glow.js)
+     ========================================================================== */
+  --glow-inicio-rgb: rgb(18, 53, 38);      /* #caa64d - Dourado / Ocre */
+  --glow-inicio-intensity: 0.38;
+  --glow-inicio-mid: 0.15;
+
+  --glow-sobre-rgb: rgb(47, 116, 87);         /* #355e3b - Verde Floresta */
+  --glow-sobre-intensity: 0.45;
+  --glow-sobre-mid: 0.18;
+
+  --glow-projetos-rgb: rgb(72, 177, 133);      /* #1b4332 - Verde Esmeralda Profundo */
+  --glow-projetos-intensity: 0.52;
+  --glow-projetos-mid: 0.22;
+
+  --glow-stack-rgb: rgb(202, 166, 77);       /* #caa64d - Dourado / Ocre */
+  --glow-stack-intensity: 0.36;
+  --glow-stack-mid: 0.14;
+
+  --glow-github-rgb: rgb(253, 246, 227);     /* #fdf6e3 - Marfim Suave */
+  --glow-github-intensity: 0.22;
+  --glow-github-mid: 0.08;
+
   --badge-bg: rgba(33, 93, 31, 0.1);
   --badge-text: #215D1F;
   --badge-border: rgba(33, 93, 31, 0.3);
@@ -52,4 +75,3 @@
   --transition-normal: 0.25s ease;
   --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-

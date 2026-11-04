@@ -69,8 +69,15 @@ body > footer {
 
 /* Padrão para seções */
 .section {
-  padding: 5.5rem 0;
+  padding: clamp(6rem, 12vh, 9rem) 0;
   position: relative;
+}
+
+.section:not(.hero) {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section.section-reveal {
@@ -174,6 +181,7 @@ body > footer {
 
 @media (max-width: 768px) {
   .section {
-    padding: 3.75rem 0;
+    padding: 5rem 0;
+    min-height: auto;
   }
 }

@@ -224,9 +224,9 @@
 
 /* Rodapé */
 .footer {
-  border-top: none;
-  padding: 2rem 0 3rem;
-  margin-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+  padding: 2.5rem 0;
+  margin-top: 4rem;
   font-size: 0.875rem;
   color: var(--text-muted);
 }
@@ -234,8 +234,7 @@
 .footer-content {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  text-align: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
 }
@@ -332,9 +331,8 @@
   }
 
   .footer {
-    border-top: none;
     margin-top: 1rem;
-    padding: 1rem 0 4.5rem;
+    padding: 1.25rem 0 1.5rem;
   }
 
   .footer-content {
